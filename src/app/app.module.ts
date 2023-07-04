@@ -26,6 +26,8 @@ import { ResultadosComponent } from './components/reportes/resultados/resultados
 import { DescargablesComponent } from './components/reportes/descargables/descargables.component';
 import { RelacionPreguntaRespuestaComponent } from './components/relacion-pregunta-respuesta/relacion-pregunta-respuesta.component';
 import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe';
+import { FiltrofacultadPipe } from './pipes/filtrofacultad.pipe';
+import { FiltronombreprogramaPipe } from './pipes/filtronombreprograma.pipe';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe'
     ResultadosComponent,
     DescargablesComponent,
     RelacionPreguntaRespuestaComponent,
-    CapitalizeFirstLetterPipe
+    CapitalizeFirstLetterPipe,
+    FiltrofacultadPipe,
+    FiltronombreprogramaPipe
   ],
   imports: [
     BrowserModule,

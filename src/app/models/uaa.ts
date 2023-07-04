@@ -5,20 +5,20 @@ import { Estado } from './estado';
 
 export class Uaa {
   codigo!: number;
-  nombre!: String;
-  nombreCorto!: String;
-  nombreImpresion!: String;
+  nombre!: string;
+  nombreCorto!: string;
+  nombreImpresion!: string;
   estado!: Estado;
   ESTADO!: number;
   sede!: Sede;
   uaaTipo!: UaaTipo;
   municipio!: Municipio;
   uaa_dependencia!: number;
-  jefe!: String;
-  email!: String;
-  telefono!: String;
-  pagina!: String;
-  direccion!: String;
-  acronimo!: String;
-  centro_costos!: String;
+  jefe!: string;
+  email!: string;
+  telefono!: string;
+  pagina!: string;
+  direccion!: string;
+  acronimo!: string;
+  centro_costos!: string;
 }
