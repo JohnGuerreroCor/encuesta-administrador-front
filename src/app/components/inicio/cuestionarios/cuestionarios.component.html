@@ -1,0 +1,114 @@
+<app-navbar>
+  <div class="container p-5">
+    <div class="row">
+      <div class="col">
+        <div
+          class="card mb-4 cursor-select card-usco-menu shadow"
+          [routerLink]="['/cuestionario']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow filter-green"
+                src="assets/circle-plus-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                  Crear cuestionario
+                </h6>
+                <p style="font-size: 11px">
+                  Crear cuestionario, configura el acceso a usuarios y
+                  parametriza la fecha de inicio y cierre del mismo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="card mb-4 cursor-select card-usco-menu shadow"
+          [routerLink]="['/previsualizacion']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow"
+                src="assets/eye-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                  Previsualizar cuestionario
+                </h6>
+                <p style="font-size: 11px">
+                  Creación de preguntas de seleccion, escala likert y
+                  parametrización de la misma.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div
+          class="card mb-4 cursor-select card-usco-menu shadow"
+          [routerLink]="['/configuracion']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow"
+                src="assets/sliders-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                  Configurar cuestionario
+                </h6>
+                <p style="font-size: 11px">
+                  Creación de respuestas según las opciones para cada ítem
+                  establecido.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="card mb-4 cursor-select card-usco-menu shadow"
+          [routerLink]="['/inicio']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow"
+                src="assets/house-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                  Inicio
+                </h6>
+                <p style="font-size: 11px">
+                  Relaciona todas las repsuesta que puede tener un ítem de
+                  selección multipel con única respuesta.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navbar>

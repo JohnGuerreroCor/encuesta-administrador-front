@@ -1,0 +1,139 @@
+<app-navbar>
+  <div class="container p-5">
+    <div class="row">
+      <div class="col">
+        <div
+          class="card mb-4 cursor-select card-usco-menu shadow"
+          [routerLink]="['/cuestionarios']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow filter-green"
+                src="assets/file-lines-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                  Cuestionarios
+                </h6>
+                <p style="font-size: 11px">
+                  Crear cuestionario, configura el acceso a usuarios y parametriza la fecha de inicio y cierre del mismo.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="card mb-4 cursor-select card-usco-menu shadow"
+          [routerLink]="['/respuesta']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow"
+                src="assets/file-pen-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                  Respuestas
+                </h6>
+                <p style="font-size: 11px">
+                  Creación de respuestas según las opciones para cada ítem establecido.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div
+          class="card mb-4 cursor-select card-usco-menu shadow"
+          [routerLink]="['/preguntas']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow"
+                src="assets/file-circle-question-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                  Preguntas
+                </h6>
+                <p style="font-size: 11px">
+                  Creación de preguntas de seleccion, escala likert y parametrización de la misma.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="card mb-4 cursor-select card-usco-menu shadow"
+          [routerLink]="['/relacion-pregunta-respuesta']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow"
+                src="assets/diagram-project-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                  Relación preguntas y respuestas
+                </h6>
+                <p style="font-size: 11px">
+                  Relaciona todas las repsuesta que puede tener un ítem de selección multipel con única respuesta.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-sm-6 m-sm-auto">
+        <div
+          class="card mb-2 cursor-select card-usco-menu shadow"
+          [routerLink]="['/reportes']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow filter-green"
+                src="assets/chart-simple-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                Reportes
+                </h6>
+                <p style="font-size: 11px">
+                  Resultados en gráficos estadísticos y generación de un reporte descarble en excel.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navbar>

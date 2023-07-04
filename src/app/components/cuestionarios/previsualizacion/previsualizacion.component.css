@@ -1,0 +1,117 @@
+.example-full-width {
+  width: 100%;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: flex-start;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.card {
+  display: inline-block !important;
+  position: relative !important;
+  width: 90%;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 14%) !important;
+  border-radius: 3px !important;
+  color: rgba(0, 0, 0, 0.87);
+  background: #fff;
+  padding-top: 0px !important;
+}
+
+.card-header {
+  box-shadow: 0 5px 20px -12px rgb(0 0 0 / 42%), 0 4px 25px 0px rgb(0 0 0 / 12%),
+    0 8px 10px -5px rgb(0 0 0 / 20%);
+  border-radius: 3px;
+  padding: 15px;
+  background-color: #4d626c;
+  margin-top: -25px !important;
+  margin-bottom: 25px;
+  color: #fff;
+  height: 65px !important;
+}
+
+.dashed {
+  border-bottom: dashed 1px #000000;
+}
+
+:host
+  ::ng-deep
+  .mat-slide-toggle.mat-checked:not(.mat-disabled)
+  .mat-slide-toggle-bar {
+  background-color: #b15b60;
+}
+
+:host
+  ::ng-deep
+  .mat-slide-toggle.mat-checked:not(.mat-disabled)
+  .mat-slide-toggle-thumb {
+  background-color: #8f141b;
+}
+
+td.mat-cell {
+  text-align: left;
+  justify-content: center;
+  padding: 10px;
+  font-size: 12px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  justify-content: center;
+  color: #fff;
+  background-color: #343a40;
+  border-color: #454d55;
+  padding: 20px;
+  font-size: 13px;
+}
+
+.foto-usco {
+  border: solid 5px white;
+  border-radius: 5px;
+}
+
+.no-border {
+  border: none;
+}
+
+.font-small-usco {
+  font-size: 11px;
+}
+
+.prev-header-encuesta-usco {
+  border: solid 1px #4d626c;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.precarga-img-usco {
+  margin-top: 5%;
+  opacity: 0.6;
+}
+
+#carnet-usco-rotulo-front {
+  background-image: linear-gradient(
+    to bottom,
+    #8f141b 0,
+    #8f141b 95%,
+    #dfd4a6 95%,
+    #dfd4a6 100%,
+    #ffffff 35%,
+    #ffffff 100%
+  );
+}
+
+.border-round-usco {
+  border-radius: 10px 10px 0px 0px;
+}

@@ -1,0 +1,201 @@
+<app-navbar>
+  <div id="content-wrap" class="container mt-3 mb-5 text-center" #target>
+    <div class="card rounded-2 p-0 shadow-sm mt-5">
+      <div
+        class="card-header ml-4 mb-3 mr-4 cursor-select"
+        [routerLink]="['/cuestionarios']"
+        routerLinkActive="router-link-active"
+      >
+        <h4 class="font-usco-default">
+          <strong>Configuración Cuestionario</strong>
+        </h4>
+      </div>
+      <div class="card-body ls">
+        <div class="row">
+          <div class="col">
+            <form [formGroup]="form" class="pl-4 pr-4">
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>UAT</mat-label>
+                    <mat-select name="food" formControlName="uat">
+                      <mat-option (click)="onUaaNull()" [value]="0">
+                        NINGUNA
+                      </mat-option>
+                      <mat-option
+                        (click)="onUaa()"
+                        *ngFor="let uat of lstUaaTipo"
+                        [value]="uat.codigo"
+                      >
+                        {{ uat.nombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col" *ngIf="lstflag">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>UAA</mat-label>
+                    <mat-select name="food" formControlName="uaa">
+                      <mat-option
+                        *ngFor="let uaa of lstUaa"
+                        [value]="uaa.codigo"
+                      >
+                        {{ uaa.nombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Cuestionario</mat-label>
+                    <mat-select name="food" formControlName="cue">
+                      <mat-option
+                        *ngFor="let cue of lstCuestionario"
+                        [value]="cue.codigo"
+                      >
+                        {{ cue.nombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Tipo de Usuario</mat-label>
+                    <mat-select name="food" formControlName="tus">
+                      <mat-option
+                        *ngFor="let tus of lstUsuarioTipo"
+                        (click)="onVin()"
+                        [value]="tus.codigo"
+                      >
+                        {{ tus.nombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col" *ngIf="flag">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Vinculacion</mat-label>
+                    <mat-select name="food" formControlName="vin">
+                      <mat-option
+                        *ngFor="let vin of lstVinculo"
+                        [value]="vin.codigo"
+                      >
+                        {{ vin.nombre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row mt-4 mb-5 text-center">
+                <div class="col">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    [disabled]="!form.valid"
+                    (click)="onCrear()"
+                  >
+                    <i class="far fa-save"></i> Registrar
+                  </button>
+                  <button
+                    (click)="onCancelar()"
+                    class="btn btn-warning ml-2 mr-2"
+                  >
+                    <i class="fa-solid fa-xmark"></i> Cancelar
+                  </button>
+
+                  <button
+                    (click)="onEliminar()"
+                    *ngIf="editar"
+                    class="btn btn-danger"
+                  >
+                    <i class="far fa-trash-alt"></i> Borrar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              class="table table-hover shadow"
+            >
+              <ng-container matColumnDef="codigo">
+                <th mat-header-cell *matHeaderCellDef>No</th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                  {{ dataSource.filteredData.indexOf(element) + 1 }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="uaa">
+                <th mat-header-cell *matHeaderCellDef>UAA</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.uaa.codigo }}.{{ element.uaa.nombre }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="cue">
+                <th mat-header-cell *matHeaderCellDef>Cuestionario</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.cuestionario.codigo }}.{{
+                    element.cuestionario.nombre
+                  }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="tus">
+                <th mat-header-cell *matHeaderCellDef>Tipo de Usuario</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.usuarioTipo.codigo }}.{{
+                    element.usuarioTipo.nombre
+                  }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="registro">
+                <th mat-header-cell *matHeaderCellDef>Registro</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.fechaRegistro | date : "dd/MM/yyyy" }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="vinculo">
+                <th mat-header-cell *matHeaderCellDef>Vinculo Docente</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.vinculo.codigo }}.{{ element.vinculo.nombre }}
+                </td>
+              </ng-container>
+
+              <!-- editar -->
+              <ng-container matColumnDef="editar">
+                <th mat-header-cell *matHeaderCellDef>Editar</th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="example-button-container">
+                    <button
+                      class="btn btn-usco-vt btn-sm"
+                      (click)="onEditarClick(element)"
+                      (click)="scroll(target)"
+                    >
+                      <i class="fas fa-pencil-alt fa-xs"></i>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+            <mat-paginator
+              [pageSizeOptions]="[20, 30, 40]"
+              showFirstLastButtons
+            ></mat-paginator>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-navbar>
