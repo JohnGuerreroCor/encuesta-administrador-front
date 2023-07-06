@@ -5,6 +5,8 @@ import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
 import { Respuesta } from '../models/respuesta';
 import { DatosGraficaPreguntaPrincipal } from '../models/datos-grafica-pregunta-principal';
+import { Pregunta } from '../models/pregunta';
+import { ReporteAgrupado } from '../models/reporte-agrupado';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +29,44 @@ export class RespuestasService {
   userLogeado: String = this.authservice.user.username;
 
   uaa: number = this.authservice.obtenerUaa(); //385
+
+  // GENERAR REPORTES AGRUPADOS
+
+  obtenerPreguntasOpciones(cuestionario: number): Observable<Pregunta[]> {
+    return this.http.get<Pregunta[]>(
+      `${this.url}/obtener-preguntas-opciones/${cuestionario}`,
+      {
+        headers: this.aggAutorizacionHeader(),
+      }
+    );
+  }
+
+  obtenerPreguntasTexto(cuestionario: number): Observable<Pregunta[]> {
+    return this.http.get<Pregunta[]>(
+      `${this.url}/obtener-preguntas-texto/${cuestionario}`,
+      {
+        headers: this.aggAutorizacionHeader(),
+      }
+    );
+  }
+
+  generarReporteAgrupadoTexto(cuestionario: number, preguntas: string): Observable<ReporteAgrupado[]> {
+    return this.http.get<ReporteAgrupado[]>(
+      `${this.url}/generar-reporte-agrupado-texto//${cuestionario}/${preguntas}`,
+      {
+        headers: this.aggAutorizacionHeader(),
+      }
+    );
+  }
+
+  generarReporteAgrupadoOpciones(cuestionario: number, preguntas: string): Observable<ReporteAgrupado[]> {
+    return this.http.get<ReporteAgrupado[]>(
+      `${this.url}/generar-reporte-agrupado-opciones/${cuestionario}/${preguntas}`,
+      {
+        headers: this.aggAutorizacionHeader(),
+      }
+    );
+  }
 
   // GENERAL ACREDITACION
 

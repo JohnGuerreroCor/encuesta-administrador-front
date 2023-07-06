@@ -15,7 +15,10 @@ import { LoginComponent } from './components/login/login.component';
 import { CuestionariosComponent } from './components/inicio/cuestionarios/cuestionarios.component';
 import { PreguntasComponent } from './components/inicio/preguntas/preguntas.component';
 import { ReportesComponent } from './components/inicio/reportes/reportes.component';
-import { CuestionarioComponent, ModalCuestionarioInformacion } from './components/cuestionarios/cuestionario/cuestionario.component';
+import {
+  CuestionarioComponent,
+  ModalCuestionarioInformacion,
+} from './components/cuestionarios/cuestionario/cuestionario.component';
 import { ConfiguracionComponent } from './components/cuestionarios/configuracion/configuracion.component';
 import { PrevisualizacionComponent } from './components/cuestionarios/previsualizacion/previsualizacion.component';
 import { PreguntaComponent } from './components/preguntas/pregunta/pregunta.component';
@@ -28,6 +31,19 @@ import { RelacionPreguntaRespuestaComponent } from './components/relacion-pregun
 import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe';
 import { FiltrofacultadPipe } from './pipes/filtrofacultad.pipe';
 import { FiltronombreprogramaPipe } from './pipes/filtronombreprograma.pipe';
+
+import { FusionChartsModule } from 'angular-fusioncharts';
+
+// Load FusionCharts
+import * as FusionCharts from 'fusioncharts';
+// Load Charts module
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+// Load fusion theme
+import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
+import { AgrupadoComponent } from './components/reportes/agrupado/agrupado.component';
+
+// Add dependencies to FusionChartsModule
+FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
 
 @NgModule({
   declarations: [
@@ -52,7 +68,8 @@ import { FiltronombreprogramaPipe } from './pipes/filtronombreprograma.pipe';
     RelacionPreguntaRespuestaComponent,
     CapitalizeFirstLetterPipe,
     FiltrofacultadPipe,
-    FiltronombreprogramaPipe
+    FiltronombreprogramaPipe,
+    AgrupadoComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,12 +78,11 @@ import { FiltronombreprogramaPipe } from './pipes/filtronombreprograma.pipe';
     MaterialModules,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FusionChartsModule,
   ],
-  entryComponents: [
-    ModalCuestionarioInformacion,
-  ],
+  entryComponents: [ModalCuestionarioInformacion],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

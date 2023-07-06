@@ -251,11 +251,27 @@
             aria-expanded="false"
           >
             <img
+              *ngIf="foto.url != ''"
+              src="{{ foto.url }}"
+              width="40"
+              height="40"
+              class="rounded-circle m-2"
+              alt="avatar image"
+            />
+            <img
+              *ngIf="foto.url == ''"
+              src="assets/precarga-usco-dos.gif"
+              width="40"
+              height="40"
+              class="rounded-circle m-2"
+              alt="avatar image"
+            />
+            <!-- <img
               src="{{ foto.url }}"
               class="rounded-circle m-2"
               alt="avatar image"
               style="width: 40px; height: 40px"
-            />
+            /> -->
             {{ nombre | titlecase }} {{ apellido | titlecase }}</a
           >
           <div

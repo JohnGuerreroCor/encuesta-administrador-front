@@ -16,6 +16,7 @@ import { GrupoLikertComponent } from './components/preguntas/grupo-likert/grupo-
 import { ResultadosComponent } from './components/reportes/resultados/resultados.component';
 import { DescargablesComponent } from './components/reportes/descargables/descargables.component';
 import { RelacionPreguntaRespuestaComponent } from './components/relacion-pregunta-respuesta/relacion-pregunta-respuesta.component';
+import { AgrupadoComponent } from './components/reportes/agrupado/agrupado.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'reportes', component: ReportesComponent },
   { path: 'resultados', component: ResultadosComponent },
   { path: 'descargables', component: DescargablesComponent },
+  { path: 'agrupados', component: AgrupadoComponent },
 
   { path: '', pathMatch: 'full', redirectTo: '/login' },
   { path: '**', pathMatch: 'full', redirectTo: '/login' },

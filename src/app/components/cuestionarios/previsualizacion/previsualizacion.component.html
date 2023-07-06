@@ -89,7 +89,7 @@
                         <small
                           style="font-size: 16px"
                           class="font-usco-bl font-usco-default font-weight-bold"
-                          >{{ p.descripcion
+                          >{{ i + 1 }}). {{ p.descripcion
                           }}<b style="color: red" *ngIf="p.obligatorio == 1"
                             >*</b
                           ></small
@@ -114,7 +114,7 @@
                     <label
                       id="example-radio-group-label"
                       class="font-usco-default font-usco-bl font-weight-bold"
-                      >{{ p.descripcion
+                      >{{ i + 1 }}). {{ p.descripcion
                       }}<b style="color: red" *ngIf="p.obligatorio == 1"
                         >*</b
                       ></label
@@ -143,7 +143,7 @@
                       <small
                         class="font-usco-bl font-usco-default font-weight-bold"
                         style="font-size: 16px"
-                        >{{ p.descripcion
+                        >{{ i + 1 }}). {{ p.descripcion
                         }}<b style="color: red" *ngIf="p.obligatorio == 1"
                           >*</b
                         ></small
@@ -166,7 +166,7 @@
                 <div *ngIf="p.tipo == 2" id="table">
                   <table id="customers">
                     <tr>
-                      <th>{{ p.descripcion }}</th>
+                      <th>{{ i + 1 }}). {{ p.descripcion }}</th>
                       <th *ngFor="let e of lstEscala[p.codigo]">
                         {{ e.nombre }}
                       </th>
