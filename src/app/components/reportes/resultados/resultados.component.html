@@ -40,9 +40,7 @@
                       <mat-option value="column3d">
                         Gráfico de barras 3D
                       </mat-option>
-                      <mat-option value="pie2d">
-                        Gráfico de torta
-                      </mat-option>
+                      <mat-option value="pie2d"> Gráfico de torta </mat-option>
                       <mat-option value="pie3d">
                         Gráfico de torta 3D
                       </mat-option>
@@ -88,7 +86,10 @@
                 />
               </div>
             </div>
-            <div *ngIf="vistaPreviaResultados" class="row text-center mt-3">
+            <div
+              *ngIf="vistaPreviaResultados"
+              class="row text-center mt-3 mb-5"
+            >
               <div class="col" *ngIf="!validador">
                 <h5 class="font-usco-default font-usco-gr">
                   Espacio para la visualización de la información
@@ -110,6 +111,33 @@
         </div>
       </div>
       <div *ngIf="vistaResultados">
+        <div class="row pl-5 pr-5 mt-4 mb-4">
+          <div class="col pl-5 pr-5">
+            <table class="table table-hover">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Estamento</th>
+                  <th scope="col">Encuestados</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let res of lstResultados; let i = index">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ res.estamentos }}</td>
+                  <td>{{ res.resultados }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">-</th>
+                  <td><b>Total</b></td>
+                  <td>
+                    <b>{{ total }}</b>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div class="row text-center" *ngFor="let chart of barChartData">
           <div class="col mb-4">
             <div class="card">

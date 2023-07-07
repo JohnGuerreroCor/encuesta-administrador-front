@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  Inject,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,6 +12,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { saveAs } from 'file-saver';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { CuestionarioService } from 'src/app/services/cuestionario.service';
@@ -20,6 +28,11 @@ import { Uaa } from 'src/app/models/uaa';
 import { ProgramaService } from 'src/app/services/programa.service';
 import Swal from 'sweetalert2';
 import { Pregunta } from 'src/app/models/pregunta';
+import { ReporteAgrupado } from 'src/app/models/reporte-agrupado';
+
+interface Agrupado {
+  columna: any;
+}
 
 @Component({
   selector: 'app-agrupado',
@@ -27,7 +40,10 @@ import { Pregunta } from 'src/app/models/pregunta';
   styleUrls: ['./agrupado.component.css'],
 })
 export class AgrupadoComponent implements OnInit {
-  lstTipos: string[] = ['Por Cuestionario'];
+  lstTipos: string[] = ['Por cuestionario'];
+  lstReporteAgrupado: ReporteAgrupado[] = [];
+  dataSource = new MatTableDataSource<ReporteAgrupado>([]);
+  @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator;
 
   form!: FormGroup;
   flag!: number;
@@ -35,6 +51,7 @@ export class AgrupadoComponent implements OnInit {
   lstPreguntas!: Pregunta[];
   lstPreguntasTexto!: any;
   lstPreguntasOpciones!: any;
+  lstPreguntasOpcionesDescripcion: any[] = [];
   lstUsuarioTipo!: UsuarioTipo[];
   lstDatosGrafica!: DatosGraficaPreguntaPrincipal[];
   lstUaa!: Uaa[];
@@ -110,14 +127,16 @@ export class AgrupadoComponent implements OnInit {
     this.form = this.fb.group({
       titulo: new FormControl('', Validators.required),
       tus: new FormControl(''),
-      cuestionario: new FormControl(''),
+      cuestionario: new FormControl('', Validators.required),
       programa: new FormControl(''),
       uaa: new FormControl(''),
-      tipoPregunta: new FormControl(''),
+      tipoPregunta: new FormControl('', Validators.required),
     });
   }
 
   obetenerTipoPreguntas() {
+    this.validador = true;
+    this.loadingUsco(null);
     this.lstPreguntas = [];
     let auxTexto: any;
     let auxOpciones: any;
@@ -139,13 +158,25 @@ export class AgrupadoComponent implements OnInit {
         .obtenerPreguntasOpciones(this.form.get('cuestionario')!.value)
         .subscribe((data) => {
           this.lstPreguntas = data;
-          this.lstPreguntas.forEach((e) => {
+          this.lstPreguntas.forEach((e, i) => {
             console.log('[' + e.codigo + ']');
-            auxOpciones = '[' + e.codigo + '],' + auxOpciones;
-            this.lstPreguntasOpciones = auxOpciones.split(',undefined');
+            if (i == 0) {
+              auxOpciones = '[' + e.codigo + ']';
+              this.lstPreguntasOpciones = auxOpciones;
+            } else {
+              auxOpciones = auxOpciones + ',' + '[' + e.codigo + ']';
+              this.lstPreguntasOpciones = auxOpciones;
+            }
+          });
+          this.lstPreguntas.forEach((e, i) => {
+            this.lstPreguntasOpcionesDescripcion.push(e.descripcion);
           });
           console.log('Opciones:', this.lstPreguntas);
           console.log('lstOpciones:', this.lstPreguntasOpciones);
+          console.log(
+            'lstOpcionesDescripcion:',
+            this.lstPreguntasOpcionesDescripcion
+          );
           this.generarReporteAgrupado();
         });
     }
@@ -155,15 +186,36 @@ export class AgrupadoComponent implements OnInit {
     this.respuestaService
       .generarReporteAgrupadoOpciones(
         this.form.get('cuestionario')!.value,
-        this.lstPreguntasOpciones[0]
+        this.lstPreguntasOpciones
       )
       .subscribe((data) => {
-        console.log('Reporte Agrupado:', data);
+        this.lstReporteAgrupado = data;
+        //this.dataSource = new MatTableDataSource<ReporteAgrupado>(data);
+
+        //this.paginator.firstPage();
+        //this.dataSource.paginator = this.paginator;
+        console.log('Reporte Agrupado:', this.lstReporteAgrupado);
+        this.loadingUsco(this.lstReporteAgrupado);
+        this.vistaPreviaResultados = false;
       });
   }
 
+  getColumnas(): string[] {
+    const allColumns: string[] = [];
+    this.lstReporteAgrupado.forEach((data) => {
+      const columns = Object.keys(data.columnas);
+      columns.forEach((column) => {
+        if (!allColumns.includes(column)) {
+          allColumns.push(column);
+        }
+      });
+    });
+    allColumns.sort();
+    return allColumns;
+  }
+
   onGenerar(): void {
-    let titulo: string = this.form.get('titulo')!.value;
+    /*  let titulo: string = this.form.get('titulo')!.value;
     let usuario: number = this.form.get('tus')!.value;
     let cuestionario = this.form.get('cuestionario')!.value;
     let programa = this.form.get('programa')!.value;
@@ -221,7 +273,7 @@ export class AgrupadoComponent implements OnInit {
         break;
       default:
         break;
-    }
+    } */
   }
   onCancelar() {
     this.form.reset();

@@ -12,6 +12,7 @@ export class RespuestaOpcionesService {
   private httpHeaders = new HttpHeaders({ 'Content-type': 'application/json' });
 
   private url: string = `${environment.URL_BACKEND}/api/respuesta-opciones`;
+  uaa: number = this.authservice.obtenerUaa();
 
   constructor(private http: HttpClient, private authservice: AuthService) {}
   private aggAutorizacionHeader(): HttpHeaders {
@@ -24,7 +25,7 @@ export class RespuestaOpcionesService {
   userLogeado: String = this.authservice.user.username;
 
   find(): Observable<RespuestaOpciones[]> {
-    return this.http.get<RespuestaOpciones[]>(`${this.url}/find`, {
+    return this.http.get<RespuestaOpciones[]>(`${this.url}/find/${this.uaa}`, {
       headers: this.aggAutorizacionHeader(),
     });
   }

@@ -1,3 +1,7 @@
 export class ReporteAgrupado {
-  [key: string]: any;
+  fecha!: string;
+  estamento!: string;
+  columnas!: {
+    [key: string]: string | null;
+  };
 }

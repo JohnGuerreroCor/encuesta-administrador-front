@@ -7,6 +7,7 @@ import { Respuesta } from '../models/respuesta';
 import { DatosGraficaPreguntaPrincipal } from '../models/datos-grafica-pregunta-principal';
 import { Pregunta } from '../models/pregunta';
 import { ReporteAgrupado } from '../models/reporte-agrupado';
+import { Resultados } from '../models/resultados';
 
 @Injectable({
   providedIn: 'root',
@@ -50,16 +51,22 @@ export class RespuestasService {
     );
   }
 
-  generarReporteAgrupadoTexto(cuestionario: number, preguntas: string): Observable<ReporteAgrupado[]> {
+  generarReporteAgrupadoTexto(
+    cuestionario: number,
+    preguntas: string
+  ): Observable<ReporteAgrupado[]> {
     return this.http.get<ReporteAgrupado[]>(
-      `${this.url}/generar-reporte-agrupado-texto//${cuestionario}/${preguntas}`,
+      `${this.url}/generar-reporte-agrupado-texto/${cuestionario}/${preguntas}`,
       {
         headers: this.aggAutorizacionHeader(),
       }
     );
   }
 
-  generarReporteAgrupadoOpciones(cuestionario: number, preguntas: string): Observable<ReporteAgrupado[]> {
+  generarReporteAgrupadoOpciones(
+    cuestionario: number,
+    preguntas: string
+  ): Observable<ReporteAgrupado[]> {
     return this.http.get<ReporteAgrupado[]>(
       `${this.url}/generar-reporte-agrupado-opciones/${cuestionario}/${preguntas}`,
       {
@@ -184,6 +191,15 @@ export class RespuestasService {
     return this.http.put<number>(
       `${this.url}/remove/${codigo} /${this.userLogeado}`,
       { headers: this.aggAutorizacionHeader() }
+    );
+  }
+
+  obtenerResultados(cuestionario: number): Observable<Resultados[]> {
+    return this.http.get<Resultados[]>(
+      `${this.url}/obtener-resultados/${cuestionario}`,
+      {
+        headers: this.aggAutorizacionHeader(),
+      }
     );
   }
 }

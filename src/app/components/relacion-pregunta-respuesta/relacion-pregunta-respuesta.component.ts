@@ -42,7 +42,7 @@ export class RelacionPreguntaRespuestaComponent implements OnInit {
 
   dataSource = new MatTableDataSource<PreguntaRespuestas>([]);
 
-  displayedColumns: string[] = ['codigo', 'rop', 'pre', 'editar'];
+  displayedColumns: string[] = ['codigo', 'pre', 'rop', 'editar'];
 
   /* displayedColumns: string[] = [
     'codigo',
