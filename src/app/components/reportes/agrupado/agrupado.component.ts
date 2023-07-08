@@ -52,6 +52,7 @@ export class AgrupadoComponent implements OnInit {
   lstPreguntasTexto!: any;
   lstPreguntasOpciones!: any;
   lstPreguntasOpcionesDescripcion: any[] = [];
+  lstPreguntasTextoDescripcion: any[] = [];
   lstUsuarioTipo!: UsuarioTipo[];
   lstDatosGrafica!: DatosGraficaPreguntaPrincipal[];
   lstUaa!: Uaa[];
@@ -134,32 +135,58 @@ export class AgrupadoComponent implements OnInit {
     });
   }
 
+  vista(){
+    this.validador = false;
+    this.lstReporteAgrupado = [];
+    this.loadingUsco(null);
+    this.vistaPreviaResultados = true;
+  }
+
   obetenerTipoPreguntas() {
-    this.validador = true;
+    this.validador = false;
     this.loadingUsco(null);
     this.lstPreguntas = [];
-    let auxTexto: any;
-    let auxOpciones: any;
+    this.lstPreguntasTexto = [];
+    this.lstPreguntasOpciones = [];
+    this.lstPreguntasOpcionesDescripcion = [];
+    this.lstPreguntasTextoDescripcion = [];
+    this.lstPreguntas = [];
+    this.lstReporteAgrupado = [];
+    let auxTexto = '';
+    let auxOpciones = '';
     if (this.form.get('tipoPregunta')!.value == 1) {
+      this.validador = true;
       this.respuestaService
         .obtenerPreguntasTexto(this.form.get('cuestionario')!.value)
         .subscribe((data) => {
           this.lstPreguntas = data;
           this.lstPreguntas.forEach((e, i) => {
-            console.log('[' + e.codigo + ']');
-            auxTexto = '[' + e.codigo + '],' + auxTexto;
-            this.lstPreguntasTexto = auxTexto.split(',undefined');
+            if (i == 0) {
+              auxTexto = '[' + e.codigo + ']';
+              this.lstPreguntasTexto = auxTexto;
+            } else {
+              auxTexto = auxTexto + ',' + '[' + e.codigo + ']';
+              this.lstPreguntasTexto = auxTexto;
+            }
           });
+          this.lstPreguntas.forEach((e, i) => {
+            this.lstPreguntasTextoDescripcion.push(e.descripcion);
+          });
+          console.log(
+            'lstPreguntasTextoDescripcion:',
+            this.lstPreguntasTextoDescripcion
+          );
           console.log('Texto:', this.lstPreguntas);
           console.log('lstTexto:', this.lstPreguntasTexto);
+          this.generarReporteAgrupadoTexto();
         });
     } else {
+      this.validador = true;
       this.respuestaService
         .obtenerPreguntasOpciones(this.form.get('cuestionario')!.value)
         .subscribe((data) => {
           this.lstPreguntas = data;
           this.lstPreguntas.forEach((e, i) => {
-            console.log('[' + e.codigo + ']');
             if (i == 0) {
               auxOpciones = '[' + e.codigo + ']';
               this.lstPreguntasOpciones = auxOpciones;
@@ -177,12 +204,30 @@ export class AgrupadoComponent implements OnInit {
             'lstOpcionesDescripcion:',
             this.lstPreguntasOpcionesDescripcion
           );
-          this.generarReporteAgrupado();
+          this.generarReporteAgrupadoOpciones();
         });
     }
   }
 
-  generarReporteAgrupado() {
+  generarReporteAgrupadoTexto() {
+    this.respuestaService
+      .generarReporteAgrupadoTexto(
+        this.form.get('cuestionario')!.value,
+        this.lstPreguntasTexto
+      )
+      .subscribe((data) => {
+        this.lstReporteAgrupado = data;
+        //this.dataSource = new MatTableDataSource<ReporteAgrupado>(data);
+
+        //this.paginator.firstPage();
+        //this.dataSource.paginator = this.paginator;
+        console.log('Reporte Agrupado:', this.lstReporteAgrupado);
+        this.loadingUsco(this.lstReporteAgrupado);
+        this.vistaPreviaResultados = false;
+      });
+  }
+
+  generarReporteAgrupadoOpciones() {
     this.respuestaService
       .generarReporteAgrupadoOpciones(
         this.form.get('cuestionario')!.value,

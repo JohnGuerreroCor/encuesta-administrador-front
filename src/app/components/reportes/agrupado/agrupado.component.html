@@ -47,12 +47,10 @@
                 <div class="col">
                   <mat-form-field class="example-full-width">
                     <mat-label>Tipo de pregunta</mat-label>
-                    <mat-select formControlName="tipoPregunta">
-                      <mat-option value="1">
-                        Prguntas de tipo texto
-                      </mat-option>
+                    <mat-select formControlName="tipoPregunta" (selectionChange)="vista()">
+                      <mat-option value="1"> Prguntas textuales </mat-option>
                       <mat-option value="2">
-                        Prguntas con opciones de respuesta
+                        Prguntas con selección múltiple
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -120,7 +118,19 @@
                     style="font-size: 8px"
                   >
                     <thead class="table-dark">
-                      <tr>
+                      <tr *ngIf="this.form.get('tipoPregunta')!.value == 1">
+                        <th>Fecha Respuesta</th>
+                        <th>Estamento</th>
+                        <th
+                          *ngFor="
+                            let columna of lstPreguntasTextoDescripcion;
+                            let i = index
+                          "
+                        >
+                          {{ i + 1 }}).{{ columna }}
+                        </th>
+                      </tr>
+                      <tr *ngIf="this.form.get('tipoPregunta')!.value == 2">
                         <th>Fecha Respuesta</th>
                         <th>Estamento</th>
                         <th
@@ -129,7 +139,7 @@
                             let i = index
                           "
                         >
-                          {{i+1}}).{{ columna }}
+                          {{ i + 1 }}).{{ columna }}
                         </th>
                       </tr>
                     </thead>

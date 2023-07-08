@@ -1,9 +1,9 @@
 <app-navbar>
-  <div class="container p-4">
+  <div class="container p-5">
     <div class="row">
-      <div class="col-sm-6 m-sm-auto">
+      <div class="col">
         <div
-          class="card mb-3 cursor-select card-usco-menu shadow"
+          class="card mb-4 cursor-select card-usco-menu shadow"
           [routerLink]="['/resultados']"
         >
           <div class="row">
@@ -30,7 +30,35 @@
           </div>
         </div>
         <div
-          class="card mb-3 cursor-select card-usco-menu shadow"
+          class="card mb-4 cursor-select card-usco-menu shadow"
+          [routerLink]="['/agrupados']"
+        >
+          <div class="row">
+            <div class="col-md-4 text-center">
+              <img
+                class="rounded w-100 p-3 shadow filter-green"
+                src="assets/list-check-solid.png"
+              />
+            </div>
+            <div class="col-md-8 mt-3 text-left p-0">
+              <div class="card-block pr-4">
+                <h6
+                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
+                >
+                  Descargar Excel Agrupado
+                </h6>
+                <p style="font-size: 11px">
+                  Registro, actualización de correo, generación de tiquete de
+                  acceso con una vigencia de 24 horas.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div
+          class="card mb-4 cursor-select card-usco-menu shadow"
           [routerLink]="['/descargables']"
         >
           <div class="row">
@@ -45,7 +73,7 @@
                 <h6
                   class="card-title text-left font-usco-vt font-weight-bold cursor-select"
                 >
-                  Descargable Excel
+                  Descargar Excel General
                 </h6>
                 <p style="font-size: 11px">
                   Registro, actualización de correo, generación de tiquete de
@@ -55,14 +83,15 @@
             </div>
           </div>
         </div>
+
         <div
-          class="card mb-2 cursor-select card-usco-menu shadow"
+          class="card mb-4 cursor-select card-usco-menu shadow"
           [routerLink]="['/inicio']"
         >
           <div class="row">
             <div class="col-md-4 text-center">
               <img
-                class="rounded w-100 p-3 shadow filter-green"
+                class="rounded w-100 p-3 shadow"
                 src="assets/house-solid.png"
               />
             </div>
@@ -73,7 +102,10 @@
                 >
                   Inicio
                 </h6>
-                <p style="font-size: 11px">Volver al menú inicial</p>
+                <p style="font-size: 11px">
+                  Relaciona todas las repsuesta que puede tener un ítem de
+                  selección multipel con única respuesta.
+                </p>
               </div>
             </div>
           </div>

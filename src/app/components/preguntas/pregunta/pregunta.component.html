@@ -287,12 +287,8 @@
                 <ng-container matColumnDef="obligatorio">
                   <th mat-header-cell *matHeaderCellDef>Obligatorio</th>
                   <td mat-cell *matCellDef="let element">
-                    <p *ngIf="element.obligatorio == 1">
-                      Si
-                    </p>
-                    <p *ngIf="element.obligatorio == 0">
-                      No
-                    </p>
+                    <p *ngIf="element.obligatorio == 1">Si</p>
+                    <p *ngIf="element.obligatorio == 0">No</p>
                   </td>
                 </ng-container>
 
@@ -319,7 +315,7 @@
               </table>
 
               <mat-paginator
-                [pageSizeOptions]="[20, 30, 40]"
+                [pageSizeOptions]="[10, 20, 30]"
                 showFirstLastButtons
               ></mat-paginator>
             </div>
