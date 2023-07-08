@@ -11,6 +11,8 @@ import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import { RespuestasService } from 'src/app/services/respuestas.service';
 import { DatePipe } from '@angular/common';
 import { Resultados } from 'src/app/models/resultados';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 interface OpcionEncuesta {
   label: any;
@@ -24,6 +26,7 @@ interface OpcionEncuesta {
   providers: [DatePipe],
 })
 export class ResultadosComponent implements OnInit {
+  titulo = '';
   width = '600';
   height = '400';
   type = 'column3d';
@@ -46,6 +49,7 @@ export class ResultadosComponent implements OnInit {
   validador: boolean = false;
   vistaPreviaResultados: boolean = true;
   vistaResultados: boolean = false;
+  form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -140,10 +144,31 @@ export class ResultadosComponent implements OnInit {
     return pieChartColor;
   }
 
-  // ChartDataSets[] = [
-  //   { data: [65, 59, 80, 81, 56, 55, 40]},
-  // ];
-  form!: FormGroup;
+  setTituloResultados(nombreCuestionario: string){
+    this.titulo = nombreCuestionario;
+  }
+
+  exportTableToExcel() {
+    // Obtener la referencia de la tabla desde el DOM
+    const table = document.getElementById('miTabla');
+
+    // Crear una nueva instancia de Workbook de xlsx
+    const workbook = XLSX.utils.table_to_book(table);
+
+    // Generar el archivo Excel
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
+
+    // Crear un Blob a partir del buffer de Excel
+    const blob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+
+    // Guardar el archivo utilizando FileSaver.js
+    saveAs(blob, 'Resultado General'+this.titulo+'.xlsx');
+  }
 
   find() {
     this.cuestionarioService.find().subscribe((data) => {

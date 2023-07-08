@@ -47,7 +47,10 @@
                 <div class="col">
                   <mat-form-field class="example-full-width">
                     <mat-label>Tipo de pregunta</mat-label>
-                    <mat-select formControlName="tipoPregunta" (selectionChange)="vista()">
+                    <mat-select
+                      formControlName="tipoPregunta"
+                      (selectionChange)="vista()"
+                    >
                       <mat-option value="1"> Prguntas textuales </mat-option>
                       <mat-option value="2">
                         Prguntas con selección múltiple
@@ -60,11 +63,20 @@
               <div class="row mt-3 text-center">
                 <div class="col">
                   <button
+                    *ngIf="(lstReporteAgrupado | json) == '[]' && !validador"
                     class="btn btn-usco-vt"
                     (click)="obetenerTipoPreguntas()"
                     [disabled]="!form.valid"
                   >
                     <i class="fa-solid fa-table-list"></i> Generar
+                  </button>
+                  <button
+                    *ngIf="(lstReporteAgrupado | json) != '[]'"
+                    class="btn btn-usco-vt"
+                    (click)="exportTableToExcel()"
+                    [disabled]="!form.valid"
+                  >
+                    <i class="fa-solid fa-file-csv"></i> Exportar Excel
                   </button>
                 </div>
               </div>
@@ -113,6 +125,7 @@
               <div class="col">
                 <div class="table-responsive">
                   <table
+                    id="miTabla"
                     *ngIf="lstReporteAgrupado.length > 0"
                     class="table table-hover"
                     style="font-size: 8px"

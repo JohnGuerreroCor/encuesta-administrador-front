@@ -22,6 +22,7 @@
                       <mat-option
                         *ngFor="let cu of lstCuestionarios"
                         [value]="cu.codigo"
+                        (click)="setTituloResultados(cu.nombre)"
                       >
                         {{ cu.nombre }}
                       </mat-option>
@@ -113,7 +114,7 @@
       <div *ngIf="vistaResultados">
         <div class="row pl-5 pr-5 mt-4 mb-4">
           <div class="col pl-5 pr-5">
-            <table class="table table-hover">
+            <table class="table table-hover" id="miTabla">
               <thead class="thead-dark">
                 <tr>
                   <th scope="col">#</th>
@@ -136,8 +137,16 @@
                 </tr>
               </tbody>
             </table>
+            <div class="row mb-4">
+              <div class="col text-right">
+                <button class="btn btn-usco-vt" (click)="exportTableToExcel()">
+                  <i class="fa-solid fa-file-csv"></i> Exportar Excel
+                </button>
+              </div>
+            </div>
           </div>
         </div>
+
         <div class="row text-center" *ngFor="let chart of barChartData">
           <div class="col mb-4">
             <div class="card">

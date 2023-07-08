@@ -1,17 +1,10 @@
-import {
-  Component,
-  HostListener,
-  Inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { saveAs } from 'file-saver';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
@@ -29,6 +22,8 @@ import { ProgramaService } from 'src/app/services/programa.service';
 import Swal from 'sweetalert2';
 import { Pregunta } from 'src/app/models/pregunta';
 import { ReporteAgrupado } from 'src/app/models/reporte-agrupado';
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx';
 
 interface Agrupado {
   columna: any;
@@ -121,7 +116,6 @@ export class AgrupadoComponent implements OnInit {
     });
     this.respuestaService.generarDatosGrafica(11).subscribe((data) => {
       this.lstDatosGrafica = data;
-      // console.log(this.lstDatosGrafica);
     });
   }
   private initForm(): void {
@@ -135,7 +129,7 @@ export class AgrupadoComponent implements OnInit {
     });
   }
 
-  vista(){
+  vista() {
     this.validador = false;
     this.lstReporteAgrupado = [];
     this.loadingUsco(null);
@@ -172,12 +166,6 @@ export class AgrupadoComponent implements OnInit {
           this.lstPreguntas.forEach((e, i) => {
             this.lstPreguntasTextoDescripcion.push(e.descripcion);
           });
-          console.log(
-            'lstPreguntasTextoDescripcion:',
-            this.lstPreguntasTextoDescripcion
-          );
-          console.log('Texto:', this.lstPreguntas);
-          console.log('lstTexto:', this.lstPreguntasTexto);
           this.generarReporteAgrupadoTexto();
         });
     } else {
@@ -198,12 +186,6 @@ export class AgrupadoComponent implements OnInit {
           this.lstPreguntas.forEach((e, i) => {
             this.lstPreguntasOpcionesDescripcion.push(e.descripcion);
           });
-          console.log('Opciones:', this.lstPreguntas);
-          console.log('lstOpciones:', this.lstPreguntasOpciones);
-          console.log(
-            'lstOpcionesDescripcion:',
-            this.lstPreguntasOpcionesDescripcion
-          );
           this.generarReporteAgrupadoOpciones();
         });
     }
@@ -221,7 +203,6 @@ export class AgrupadoComponent implements OnInit {
 
         //this.paginator.firstPage();
         //this.dataSource.paginator = this.paginator;
-        console.log('Reporte Agrupado:', this.lstReporteAgrupado);
         this.loadingUsco(this.lstReporteAgrupado);
         this.vistaPreviaResultados = false;
       });
@@ -239,7 +220,6 @@ export class AgrupadoComponent implements OnInit {
 
         //this.paginator.firstPage();
         //this.dataSource.paginator = this.paginator;
-        console.log('Reporte Agrupado:', this.lstReporteAgrupado);
         this.loadingUsco(this.lstReporteAgrupado);
         this.vistaPreviaResultados = false;
       });
@@ -259,67 +239,28 @@ export class AgrupadoComponent implements OnInit {
     return allColumns;
   }
 
-  onGenerar(): void {
-    /*  let titulo: string = this.form.get('titulo')!.value;
-    let usuario: number = this.form.get('tus')!.value;
-    let cuestionario = this.form.get('cuestionario')!.value;
-    let programa = this.form.get('programa')!.value;
-    // console.log(titulo + usuario + cuestionario + programa);
-    this.loadingUsco(null);
-    this.validador = true;
-    this.vistaResultados = false;
+  exportTableToExcel() {
+    // Obtener la referencia de la tabla desde el DOM
+    const table = document.getElementById('miTabla');
 
-    switch (this.flag) {
-      case 0:
-        this.respuestaService.generarExcel(titulo).subscribe((data) => {
-          this.onCancelar();
+    // Crear una nueva instancia de Workbook de xlsx
+    const workbook = XLSX.utils.table_to_book(table);
 
-          var blob = new Blob([data], { type: 'application/vnd.ms-excel' });
-          this.loadingUsco(blob);
-          saveAs(blob, titulo + '.xlsx');
-        });
+    // Generar el archivo Excel
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
 
-        break;
-      case 1:
-        this.respuestaService
-          .generarExcelPorUsuarioTipo(titulo, usuario)
-          .subscribe((data) => {
-            this.onCancelar();
+    // Crear un Blob a partir del buffer de Excel
+    const blob = new Blob([excelBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
 
-            var blob = new Blob([data], { type: 'application/vnd.ms-excel' });
-            this.loadingUsco(blob);
-            saveAs(blob, titulo + '.xlsx');
-          });
-
-        break;
-      case 2:
-        // console.log(cuestionario);
-
-        this.respuestaService
-          .generarExcelPorCuestionario(titulo, cuestionario)
-          .subscribe((data) => {
-            this.onCancelar();
-            var blob = new Blob([data], { type: 'application/vnd.ms-excel' });
-            this.loadingUsco(blob);
-            saveAs(blob, titulo + '.xlsx');
-          });
-        break;
-      case 3:
-        // console.log(programa);
-
-        this.respuestaService
-          .generarExcelPorPrograma(programa, titulo)
-          .subscribe((data) => {
-            this.onCancelar();
-            var blob = new Blob([data], { type: 'application/vnd.ms-excel' });
-            this.loadingUsco(blob);
-            saveAs(blob, titulo + '.xlsx');
-          });
-        break;
-      default:
-        break;
-    } */
+    // Guardar el archivo utilizando FileSaver.js
+    saveAs(blob, this.form.get('titulo')!.value + '.xlsx');
   }
+
   onCancelar() {
     this.form.reset();
   }
