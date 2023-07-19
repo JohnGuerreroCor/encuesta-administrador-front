@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Usuario } from '../../models/usuario';
 import { Router } from '@angular/router';
+import { Usuario } from '../../models/usuario';
 import swal from 'sweetalert2';
 
 @Component({
@@ -15,12 +21,18 @@ export class LoginComponent implements OnInit {
   ver = true;
   today = new Date();
   cargando: boolean = false;
+  formLogin!: FormGroup;
 
-  constructor(public authService: AuthService, private router: Router) {
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
     this.usuario = new Usuario();
   }
 
   ngOnInit() {
+    this.crearFormularioLogin();
     if (this.authService.isAuthenticated()) {
       if (this.authService.codigoverificacion != null) {
         const Toast = swal.mixin({
@@ -46,29 +58,19 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  private crearFormularioLogin(): void {
+    this.formLogin = this.formBuilder.group({
+      usuario: new FormControl('', Validators.required),
+      contraseniaUno: new FormControl('', Validators.required),
+      contraseniaDos: new FormControl('', Validators.required),
+    });
+  }
+
   login(): void {
     this.cargando = true;
-    if (this.usuario.username == null || this.usuario.password == null) {
-      const Toast = swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', swal.stopTimer);
-          toast.addEventListener('mouseleave', swal.resumeTimer);
-        },
-      });
-
-      Toast.fire({
-        icon: 'error',
-        title: 'Usuario o contraseña vacías.',
-      });
-
-      this.cargando = false;
-      return;
-    }
+    this.usuario.username = this.formLogin.get('usuario')!.value;
+    this.usuario.password = this.formLogin.get('contraseniaUno')!.value;
+    this.usuario.clave2 = this.formLogin.get('contraseniaDos')!.value;
     this.authService.login(this.usuario).subscribe(
       (response) => {
         this.authService.guardarUsuario(response.access_token);

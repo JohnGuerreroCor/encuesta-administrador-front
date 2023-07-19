@@ -1,4 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router, NavigationExtras } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
@@ -19,37 +25,48 @@ export class TokenComponent implements OnInit {
   public roles: String[] = this.auth.user.roles;
   public rol: String = this.roles.toString();
   @Output() rolEvent = new EventEmitter<any>();
+  formToken!: FormGroup;
 
   constructor(
     public auth: AuthService,
     private router: Router,
-    public tokenService: TokenService
+    public tokenService: TokenService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.crearFormularioToken();
     this.tokenService
       .gettokenUsco()
       .subscribe((correo) => (this.correo = correo));
   }
 
+  private crearFormularioToken(): void {
+    this.formToken = this.formBuilder.group({
+      token: new FormControl('', Validators.required),
+    });
+  }
+
   validarToken() {
     this.cargando = true;
     this.rolEvent.emit(this.rol);
-    if (this.codigo) {
-      this.tokenService.validartokenUsco(this.codigo).subscribe(
-        (response) => {
-          this.auth.guardarCodigoverificacion('true');
-          swal.fire({
-            icon: 'success',
-            title: 'Inicio de sesión ',
-            text: 'Codigo de verificación correcto.',
-            confirmButtonText: 'Listo',
-            confirmButtonColor: '#8f141b',
-          });
-          this.router.navigate(['/inicio']);
-        },
-        (err) => this.fError(err)
-      );
+    if (this.formToken.get('token')!.value) {
+      this.tokenService
+        .validartokenUsco(this.formToken.get('token')!.value)
+        .subscribe(
+          (response) => {
+            this.auth.guardarCodigoverificacion('true');
+            swal.fire({
+              icon: 'success',
+              title: 'Inicio de sesión ',
+              text: 'Codigo de verificación correcto.',
+              confirmButtonText: 'Listo',
+              confirmButtonColor: '#8f141b',
+            });
+            this.router.navigate(['/inicio']);
+          },
+          (err) => this.fError(err)
+        );
     }
   }
 

@@ -294,6 +294,13 @@ h6 {
   --mat-mdc-radio-checked-ripple-color: #8f141b;
 }
 
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+}
+
 .tiquete {
   width: 300px;
   border-radius: 2px;

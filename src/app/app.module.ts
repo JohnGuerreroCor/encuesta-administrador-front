@@ -34,6 +34,9 @@ import { FiltronombreprogramaPipe } from './pipes/filtronombreprograma.pipe';
 
 import { FusionChartsModule } from 'angular-fusioncharts';
 
+import {NgxPrintModule} from 'ngx-print';
+
+
 // Load FusionCharts
 import * as FusionCharts from 'fusioncharts';
 // Load Charts module
@@ -80,6 +83,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FusionChartsModule,
+    NgxPrintModule,
   ],
   entryComponents: [ModalCuestionarioInformacion],
   providers: [],

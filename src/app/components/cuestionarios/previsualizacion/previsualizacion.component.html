@@ -60,6 +60,7 @@
       *ngIf="flag"
       class="row prev-header-encuesta-usco mt-4 mb-5 shadow"
       style="background-color: white"
+      id="print-section"
     >
       <div class="col">
         <div
@@ -206,6 +207,18 @@
         </div>
         <!-- <h6 *ngFor="let p of lstEscala"> {{p.valor}}.{{p.nombre}}</h6> -->
       </div>
+    </div>
+  </div>
+  <div class="row mb-5" *ngIf="flag">
+    <div class="col text-center">
+      <button
+        class="btn btn-info"
+        [useExistingCss]="true"
+        printSectionId="print-section"
+        ngxPrint
+      >
+        <i class="fa-solid fa-print"></i> Imprimir
+      </button>
     </div>
   </div>
 </app-navbar>

@@ -15,7 +15,7 @@
       <div class="row">
         <div class="col">
           <h6 class="font-weight-bold text-white">
-            SISTEMA ADMINISTRADOR DE ENCUESTAS <br />
+            ADMINISTRADOR ENCUESTAS <br />
             INICIO DE SESIÓN
           </h6>
         </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="card-body text-center font-usco-gr">
       <div class="container">
-        <form>
+        <form [formGroup]="formLogin">
           <div class="row">
             <div class="col">
               <mat-form-field class="example-full-width">
@@ -33,8 +33,7 @@
                 <mat-label>Usuario</mat-label>
                 <input
                   matInput
-                  [(ngModel)]="usuario.username"
-                  placeholder="a1075******"
+                  formControlName="usuario"
                   name="username"
                   autocomplete="off"
                 />
@@ -51,7 +50,7 @@
                 <input
                   matInput
                   [type]="hide ? 'password' : 'text'"
-                  [(ngModel)]="usuario.password"
+                  formControlName="contraseniaUno"
                   type="password"
                   name="password"
                   placeholder="Digite la primera clave"
@@ -76,7 +75,7 @@
                 <input
                   matInput
                   [type]="ver ? 'password' : 'text'"
-                  [(ngModel)]="usuario.clave2"
+                  formControlName="contraseniaDos"
                   type="password"
                   name="clave2"
                   placeholder="Digite la segunda clave"
@@ -93,10 +92,13 @@
           </div>
           <div class="row">
             <div class="col mt-3 mb-4">
-              <button (click)="login()" type="submit" class="btn btn-usco-vt">
+              <button
+                (click)="login()"
+                type="submit"
+                class="btn btn-usco-vt"
+                [disabled]="!formLogin.valid"
+              >
                 Ingresar
-                <!-- <i class="fas fa-spinner fa-pulse"></i>
-                <i class="fa fa-spinner fa-spin"></i> -->
                 <span
                   *ngIf="cargando"
                   class="spinner-border spinner-border-sm"
@@ -118,7 +120,7 @@
           <div>
             <small
               ><b class="version"
-                >© {{ today | date : "yyyy" }} CITCD - Versión 2 Construcción
+                >© {{ today | date : "yyyy" }} CITCD - Versión 1 Construcción
                 1.0</b
               ></small
             >
