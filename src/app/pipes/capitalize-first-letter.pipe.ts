@@ -5,8 +5,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CapitalizeFirstLetterPipe implements PipeTransform {
   transform(value: string): string {
-    if (!value) return value;
+    if (!value) return '';
 
-    return value.charAt(0).toUpperCase() + value.slice(1);
+    // Convertimos todo el texto a minúsculas
+    const lowerCaseText = value.toLowerCase();
+
+    // Convertimos la primera letra a mayúscula
+    const result =
+      lowerCaseText.charAt(0).toUpperCase() + lowerCaseText.slice(1);
+
+    return result;
   }
 }

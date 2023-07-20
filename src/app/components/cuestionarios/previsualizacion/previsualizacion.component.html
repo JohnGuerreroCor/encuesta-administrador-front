@@ -16,14 +16,14 @@
             <form [formGroup]="form" class="pl-4 pr-4">
               <div class="row">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field class="example-full-width-form">
                     <mat-label>Cuestionarios</mat-label>
                     <mat-select formControlName="codigo">
                       <mat-option
                         *ngFor="let cu of lstCuestionarios"
                         [value]="cu.codigo"
                       >
-                        {{ cu.nombre }}
+                        {{ cu.nombre | capitalizeFirstLetter }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -56,156 +56,169 @@
         </div>
       </div>
     </div>
-    <div
-      *ngIf="flag"
-      class="row prev-header-encuesta-usco mt-4 mb-5 shadow"
-      style="background-color: white"
-      id="print-section"
-    >
-      <div class="col">
-        <div
-          class="row text-justify text-white border-round-usco p-5"
-          id="carnet-usco-rotulo-front"
-        >
-          <div class="col">
-            <h3 class="font-usco-default">
-              Cuestionario: {{ titulo | lowercase }}
-            </h3>
-            <h4 class="font-usco-default mt-3">
-              <b>Dirigida a: </b>{{ dirigido | lowercase }}
-            </h4>
-            <h4 class="font-usco-default mt-3">Instrucciones</h4>
-            <p class="text-justify">{{ instrucciones }}</p>
+    <div class="container pl-5 pr-5 mt-5" id="print-section">
+      <div *ngIf="flag" class="row prev-header-encuesta-usco mt-2 mb-3 shadow">
+        <div class="col">
+          <div
+            class="row border-round-usco pl-5 pr-5 pb-3 pt-4"
+            id="carnet-usco-rotulo-front"
+          >
+            <div class="col text-center font-usco-gr mt-2">
+              <img style="width: 40%" src="assets/encuesta.png" alt="USCO" />
+              <hr class="dashed" />
+              <h4 class="font-usco-default text-left font-usco-gr-d6">
+                {{ titulo | capitalizeFirstLetter }}
+              </h4>
+              <h6 class="font-usco-default mt-3 text-left">
+                <span class="font-usco-gr-d6"
+                  ><i class="fa-solid fa-user"></i> Dirigida a:</span
+                >
+                {{ dirigido | capitalizeFirstLetter }}
+              </h6>
+              <h6 class="font-usco-default mt-3 text-left font-usco-gr-d6">
+                <i class="fa-solid fa-circle-info"></i> Instrucciones.
+              </h6>
+              <p class="text-justify">{{ instrucciones }}</p>
+            </div>
           </div>
         </div>
-        <div class="row pl-5 pr-5">
-          <div class="col">
-            <div class="row" *ngFor="let p of lstPreguntass; let i = index">
-              <div class="col">
-                <div *ngIf="p.tipo == 0">
-                  <hr />
-                  <div *ngIf="p.tipoRespuesta.codigo == 2">
-                    <div>
-                      <div class="form-group text-left">
-                        <small
-                          style="font-size: 16px"
-                          class="font-usco-bl font-usco-default font-weight-bold"
-                          >{{ i + 1 }}). {{ p.descripcion
-                          }}<b style="color: red" *ngIf="p.obligatorio == 1"
-                            >*</b
-                          ></small
-                        >
-                        <mat-form-field
-                          class="example-full-width"
+      </div>
+      <div
+        *ngIf="flag"
+        class="row prev-header-encuesta-usco mb-5 shadow"
+        style="background-color: white"
+      >
+        <div class="col">
+          <div class="row pl-5 pr-5">
+            <div class="col mt-5">
+              <div class="row" *ngFor="let p of lstPreguntass; let i = index">
+                <div class="col">
+                  <div *ngIf="p.tipo == 0">
+                    <div *ngIf="p.tipoRespuesta.codigo == 2">
+                      <div>
+                        <div class="form-group text-left">
+                          <small
+                            style="font-size: 16px"
+                            class="font-usco-gr font-usco-default font-weight-bold"
+                            >{{ i + 1 }}). {{ p.descripcion
+                            }}<b style="color: red" *ngIf="p.obligatorio == 1"
+                              >*</b
+                            ></small
+                          >
+                          <mat-form-field
+                            class="example-full-width"
+                            style="
+                              margin-top: 0;
+                              margin-bottom: 0;
+                              padding-top: 0;
+                              padding-bottom: 0;
+                            "
+                          >
+                            <mat-label>Digite aquí su respuesta</mat-label>
+                            <input matInput #message maxlength="100" />
+                            <mat-hint>{{ p.textoAdicional }}</mat-hint>
+                          </mat-form-field>
+                        </div>
+                        <hr />
+                      </div>
+                    </div>
+                    <div class="text-left" *ngIf="p.tipoRespuesta.codigo == 1">
+                      <label
+                        id="example-radio-group-label"
+                        class="font-usco-default font-usco-gr font-weight-bold"
+                        >{{ i + 1 }}). {{ p.descripcion
+                        }}<b style="color: red" *ngIf="p.obligatorio == 1"
+                          >*</b
+                        ></label
+                      >
+                      <mat-radio-group
+                        aria-labelledby="example-radio-group-label"
+                        class="example-radio-group"
+                      >
+                        <mat-radio-button
+                          class="example-radio-button"
                           style="
                             margin-top: 0;
                             margin-bottom: 0;
                             padding-top: 0;
                             padding-bottom: 0;
                           "
+                          *ngFor="let res of lstOpciones[p.codigo]"
+                          [value]="res.codigo"
                         >
-                          <mat-label>Digite aquí su respuesta</mat-label>
-                          <input matInput #message maxlength="100" />
+                          {{ res.respuestaOpciones.descripcion }}
+                        </mat-radio-button>
+                      </mat-radio-group>
+                      <hr />
+                    </div>
+                    <div *ngIf="p.tipoRespuesta.codigo == 4">
+                      <div class="form-group text-left">
+                        <small
+                          class="font-usco-gr font-usco-default font-weight-bold"
+                          style="font-size: 16px"
+                          >{{ i + 1 }}). {{ p.descripcion
+                          }}<b style="color: red" *ngIf="p.obligatorio == 1"
+                            >*</b
+                          ></small
+                        >
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Selecciones una opción</mat-label>
+                          <mat-select>
+                            <mat-option
+                              *ngFor="let res of lstOpciones[p.codigo]"
+                              [value]="res.codigo"
+                            >
+                              {{ res.respuestaOpciones.descripcion }}
+                            </mat-option>
+                          </mat-select>
                           <mat-hint>{{ p.textoAdicional }}</mat-hint>
                         </mat-form-field>
                       </div>
                     </div>
                   </div>
-                  <div class="text-left" *ngIf="p.tipoRespuesta.codigo == 1">
-                    <label
-                      id="example-radio-group-label"
-                      class="font-usco-default font-usco-bl font-weight-bold"
-                      >{{ i + 1 }}). {{ p.descripcion
-                      }}<b style="color: red" *ngIf="p.obligatorio == 1"
-                        >*</b
-                      ></label
-                    >
-                    <mat-radio-group
-                      aria-labelledby="example-radio-group-label"
-                      class="example-radio-group"
-                    >
-                      <mat-radio-button
-                        class="example-radio-button"
-                        style="
-                          margin-top: 0;
-                          margin-bottom: 0;
-                          padding-top: 0;
-                          padding-bottom: 0;
+                  <div *ngIf="p.tipo == 2" id="table">
+                    <table id="customers">
+                      <tr>
+                        <th>{{ i + 1 }}). {{ p.descripcion }}</th>
+                        <th *ngFor="let e of lstEscala[p.codigo]">
+                          {{ e.nombre }}
+                        </th>
+                      </tr>
+                      <tr
+                        *ngFor="
+                          let pre of lstSubPreguntas[p.codigo];
+                          let i = index
                         "
-                        *ngFor="let res of lstOpciones[p.codigo]"
-                        [value]="res.codigo"
                       >
-                        {{ res.respuestaOpciones.descripcion }}
-                      </mat-radio-button>
-                    </mat-radio-group>
-                  </div>
-                  <div *ngIf="p.tipoRespuesta.codigo == 4">
-                    <div class="form-group text-left">
-                      <small
-                        class="font-usco-bl font-usco-default font-weight-bold"
-                        style="font-size: 16px"
-                        >{{ i + 1 }}). {{ p.descripcion
-                        }}<b style="color: red" *ngIf="p.obligatorio == 1"
-                          >*</b
-                        ></small
-                      >
-                      <mat-form-field class="example-full-width">
-                        <mat-label>Selecciones una opción</mat-label>
-                        <mat-select>
-                          <mat-option
-                            *ngFor="let res of lstOpciones[p.codigo]"
-                            [value]="res.codigo"
-                          >
-                            {{ res.respuestaOpciones.descripcion }}
-                          </mat-option>
-                        </mat-select>
-                        <mat-hint>{{ p.textoAdicional }}</mat-hint>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                </div>
-                <div *ngIf="p.tipo == 2" id="table">
-                  <table id="customers">
-                    <tr>
-                      <th>{{ i + 1 }}). {{ p.descripcion }}</th>
-                      <th *ngFor="let e of lstEscala[p.codigo]">
-                        {{ e.nombre }}
-                      </th>
-                    </tr>
-                    <tr
-                      *ngFor="
-                        let pre of lstSubPreguntas[p.codigo];
-                        let i = index
-                      "
-                    >
-                      <td *ngIf="p.obligatorio == 1">
-                        {{ pre.descripcion }} <b style="color: red">*</b>
-                      </td>
-                      <td *ngIf="p.obligatorio == 0">
-                        {{ pre.descripcion }}
-                      </td>
+                        <td *ngIf="p.obligatorio == 1">
+                          {{ pre.descripcion }} <b style="color: red">*</b>
+                        </td>
+                        <td *ngIf="p.obligatorio == 0">
+                          {{ pre.descripcion }}
+                        </td>
 
-                      <td
-                        class="text-center"
-                        *ngFor="let e of lstEscala[p.codigo]"
-                      >
-                        <input
-                          type="radio"
-                          name="{{ pre.codigo }}"
-                          value="{{ e.codigo }}"
-                        /><span class="ml-1" style="font-size: 13px">{{
-                          e.valor
-                        }}</span>
-                      </td>
-                    </tr>
-                  </table>
-                  <hr />
+                        <td
+                          class="text-center"
+                          *ngFor="let e of lstEscala[p.codigo]"
+                        >
+                          <input
+                            type="radio"
+                            name="{{ pre.codigo }}"
+                            value="{{ e.codigo }}"
+                          /><span class="ml-1" style="font-size: 13px">{{
+                            e.valor
+                          }}</span>
+                        </td>
+                      </tr>
+                    </table>
+                    <hr />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- <h6 *ngFor="let p of lstEscala"> {{p.valor}}.{{p.nombre}}</h6> -->
         </div>
-        <!-- <h6 *ngFor="let p of lstEscala"> {{p.valor}}.{{p.nombre}}</h6> -->
       </div>
     </div>
   </div>
