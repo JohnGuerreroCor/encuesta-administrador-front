@@ -24,7 +24,7 @@
                         [value]="cu.codigo"
                         (click)="setTituloResultados(cu.nombre)"
                       >
-                        {{ cu.nombre }}
+                        {{ cu.nombre | capitalizeFirstLetter }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>

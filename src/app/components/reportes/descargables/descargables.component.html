@@ -52,7 +52,7 @@
                         *ngFor="let tus of lstUsuarioTipo"
                         [value]="tus.codigo"
                       >
-                        {{ tus.nombre }}
+                        {{ tus.nombre | capitalizeFirstLetter }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -67,7 +67,7 @@
                         *ngFor="let cue of lstCuestionarios"
                         [value]="cue.codigo"
                       >
-                        {{ cue.nombre }}
+                        {{ cue.nombre | capitalizeFirstLetter }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
