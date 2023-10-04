@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { MaterialModules } from './material.modules';
 
@@ -31,6 +32,7 @@ import { RelacionPreguntaRespuestaComponent } from './components/relacion-pregun
 import { CapitalizeFirstLetterPipe } from './pipes/capitalize-first-letter.pipe';
 import { FiltrofacultadPipe } from './pipes/filtrofacultad.pipe';
 import { FiltronombreprogramaPipe } from './pipes/filtronombreprograma.pipe';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { FusionChartsModule } from 'angular-fusioncharts';
 
@@ -86,7 +88,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
     NgxPrintModule,
   ],
   entryComponents: [ModalCuestionarioInformacion],
-  providers: [],
+  providers: [DatePipe, {provide: MAT_DATE_LOCALE, useValue: 'es-ES'}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -140,8 +140,10 @@ export class CuestionarioComponent implements OnInit {
     this.form.get('codigo')!.setValue(element.codigo);
     this.form.get('nombre')!.setValue(element.nombre);
     this.form.get('instrucciones')!.setValue(element.instrucciones);
-    this.form.get('fechaInicio')!.setValue(element.inicio);
-    this.form.get('fechaVigencia')!.setValue(element.fin);
+    let fechaInicio = new Date(element.inicio + ' 0:00:00');
+    this.form.get('fechaInicio')!.setValue(fechaInicio);
+    let fechaFin = new Date(element.fin + ' 0:00:00');
+    this.form.get('fechaVigencia')!.setValue(fechaFin);
   }
 
   onCrear(): void {

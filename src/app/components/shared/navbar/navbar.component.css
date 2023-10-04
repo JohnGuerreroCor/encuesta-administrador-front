@@ -64,3 +64,13 @@
   padding-top: 8px;
   color: #ffffff;
 }
+
+.mat-sidenav-content {
+  position: relative; /* Asegura que la posición relativa esté habilitada en el contenedor */
+}
+
+.mat-toolbar {
+  position: sticky;
+  top: 0; /* Fija la barra de herramientas en la parte superior */
+  z-index: 2; /* Asegura que la barra de herramientas esté por encima del contenido */
+}

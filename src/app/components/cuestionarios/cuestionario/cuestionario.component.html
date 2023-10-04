@@ -21,13 +21,13 @@
                     <input
                       matInput
                       #input
-                      maxlength="256"
+                      maxlength="150"
                       formControlName="nombre"
                       placeholder="Nombre del cuestionario..."
                       required
                     />
                     <mat-hint align="end"
-                      >{{ input.value.length }}/256</mat-hint
+                      >{{ input.value.length }}/150</mat-hint
                     >
                   </mat-form-field>
                 </div>
@@ -64,7 +64,7 @@
                         [min]="fechaLimiteMinima"
                         formControlName="fechaInicio"
                       />
-                      <mat-hint>Mes/Día/Año</mat-hint>
+                      <mat-hint>Día/Mes/Año</mat-hint>
                       <mat-datepicker-toggle
                         matIconSuffix
                         [for]="picker1"
@@ -83,7 +83,7 @@
                         [min]="fechaLimiteMinimaVigencia"
                         formControlName="fechaVigencia"
                       />
-                      <mat-hint>Mes/Día/Año</mat-hint>
+                      <mat-hint>Día/Mes/Año</mat-hint>
                       <mat-datepicker-toggle
                         matIconSuffix
                         [for]="picker2"
