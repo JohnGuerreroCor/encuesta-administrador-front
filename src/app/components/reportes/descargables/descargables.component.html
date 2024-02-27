@@ -15,7 +15,7 @@
           <div class="col">
             <div class="row mt-3 text-center">
               <div class="col">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Tipo de Reporte</mat-label>
                   <mat-select [(ngModel)]="flag">
                     <mat-option
@@ -31,7 +31,10 @@
             <form [formGroup]="form">
               <div class="row text-center">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Titulo para el Archivo del Reporte</mat-label>
                     <input
                       matInput
@@ -45,7 +48,10 @@
               </div>
               <div class="row text-center" *ngIf="flag == 1">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Tipo de Usuario</mat-label>
                     <mat-select formControlName="tus">
                       <mat-option
@@ -60,7 +66,10 @@
               </div>
               <div class="row text-center" *ngIf="flag == 2">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Cuestionario</mat-label>
                     <mat-select formControlName="cuestionario">
                       <mat-option
@@ -76,7 +85,10 @@
               <div class="row text-center" *ngIf="flag == 3">
                 <div class="col">
                   <form>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
                       <mat-label>UAA</mat-label>
                       <mat-select name="uaa" [(ngModel)]="ua">
                         <mat-option
@@ -92,7 +104,7 @@
               </div>
               <!-- <div class="row text-center" *ngIf="flag == 3">
               <div class="col">
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="example-full-width" appearance="outline">
                   <mat-label>Programa</mat-label>
                   <mat-select formControlName="programa">
                     <mat-option
@@ -107,7 +119,10 @@
             </div> -->
               <div class="row text-center" *ngIf="flag == 3">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Programa</mat-label>
                     <form>
                       <input

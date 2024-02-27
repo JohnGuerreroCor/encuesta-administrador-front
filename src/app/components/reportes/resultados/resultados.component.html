@@ -16,7 +16,10 @@
             <form [formGroup]="form" class="pl-4 pr-4">
               <div class="row">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Cuestionarios</mat-label>
                     <mat-select formControlName="codigo">
                       <mat-option
@@ -32,7 +35,10 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Tipo de gráfico</mat-label>
                     <mat-select formControlName="grafico">
                       <mat-option value="column2d">

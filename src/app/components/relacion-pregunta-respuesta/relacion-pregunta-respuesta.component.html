@@ -16,7 +16,10 @@
             <form [formGroup]="form2" class="pl-4 pr-4">
               <div class="row">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Cuestionario</mat-label>
                     <mat-select name="cuestionario" formControlName="cue">
                       <mat-option
@@ -58,7 +61,10 @@
               <form [formGroup]="form" class="pl-4 pr-4">
                 <div class="row">
                   <div class="col">
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
                       <mat-label>Preguntas</mat-label>
                       <mat-select name="preguntas" formControlName="pre">
                         <mat-option
@@ -74,7 +80,11 @@
                 </div>
                 <div class="row">
                   <div class="col">
-                    <mat-form-field class="example-full-width" *ngIf="editar2">
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                      *ngIf="editar2"
+                    >
                       <mat-label>Descripción</mat-label>
                       <input
                         matInput
@@ -92,7 +102,10 @@
                 </div>
                 <div class="row text-center mt-4">
                   <div class="col">
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
                       <mat-label>Opciones de Respuestas</mat-label>
                       <mat-select name="re" formControlName="re">
                         <mat-option
@@ -107,7 +120,11 @@
                 </div>
                 <div class="row text-center mt-4">
                   <div class="col">
-                    <mat-form-field *ngIf="editar2" class="example-full-width">
+                    <mat-form-field
+                      *ngIf="editar2"
+                      class="example-full-width"
+                      appearance="outline"
+                    >
                       <mat-label>Depende</mat-label>
                       <mat-select
                         name="depende"

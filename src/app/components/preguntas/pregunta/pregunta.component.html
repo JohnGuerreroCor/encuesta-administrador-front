@@ -16,7 +16,10 @@
             <form [formGroup]="form2" class="pl-4 pr-4">
               <div class="row">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Cuestionario</mat-label>
                     <mat-select formControlName="cuestionario">
                       <mat-option
@@ -59,7 +62,10 @@
                 <div *ngIf="cueVerificacion">
                   <div class="row">
                     <div class="col-sm-3">
-                      <mat-form-field class="example-full-width">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
                         <mat-label>Codigo Pregunta</mat-label>
                         <textarea
                           matInput
@@ -71,7 +77,10 @@
                       </mat-form-field>
                     </div>
                     <div class="col">
-                      <mat-form-field class="example-full-width">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
                         <mat-label>Pregunta</mat-label>
                         <textarea
                           matInput
@@ -85,7 +94,10 @@
                   </div>
                   <div class="row">
                     <div class="col">
-                      <mat-form-field class="example-full-width">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
                         <mat-label>Texto Adicional</mat-label>
                         <textarea
                           matInput
@@ -99,7 +111,10 @@
                   </div>
                   <div class="row">
                     <div class="col">
-                      <mat-form-field class="example-full-width">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
                         <mat-label>Tipo de Respuesta</mat-label>
                         <mat-select name="food" formControlName="trespuesta">
                           <mat-option
@@ -112,7 +127,10 @@
                       </mat-form-field>
                     </div>
                     <div class="col">
-                      <mat-form-field class="example-full-width">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
                         <mat-label>Tipo De Pregunta</mat-label>
                         <mat-select formControlName="tipo">
                           <mat-option
@@ -148,7 +166,10 @@
                   <div *ngIf="depende">
                     <div class="row pl-3 pr-3">
                       <div class="col">
-                        <mat-form-field class="example-full-width">
+                        <mat-form-field
+                          class="example-full-width"
+                          appearance="outline"
+                        >
                           <mat-label>Pregunta de la cual depende</mat-label>
                           <mat-select formControlName="depende">
                             <mat-option
@@ -165,7 +186,10 @@
                   <div *ngIf="gre">
                     <div class="row pl-3 pr-3">
                       <div class="col">
-                        <mat-form-field class="example-full-width">
+                        <mat-form-field
+                          class="example-full-width"
+                          appearance="outline"
+                        >
                           <mat-label>Grupo de la Escala</mat-label>
                           <mat-select formControlName="grup">
                             <mat-option

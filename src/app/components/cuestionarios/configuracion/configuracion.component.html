@@ -16,7 +16,10 @@
             <form [formGroup]="form" class="pl-4 pr-4">
               <div class="row">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>UAT</mat-label>
                     <mat-select name="food" formControlName="uat">
                       <mat-option (click)="onUaaNull()" [value]="0">
@@ -33,7 +36,10 @@
                   </mat-form-field>
                 </div>
                 <div class="col" *ngIf="lstflag">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>UAA</mat-label>
                     <mat-select name="food" formControlName="uaa">
                       <mat-option
@@ -48,7 +54,10 @@
               </div>
               <div class="row">
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Cuestionario</mat-label>
                     <mat-select name="food" formControlName="cue">
                       <mat-option
@@ -61,7 +70,10 @@
                   </mat-form-field>
                 </div>
                 <div class="col">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Tipo de Usuario</mat-label>
                     <mat-select name="food" formControlName="tus">
                       <mat-option
@@ -75,7 +87,10 @@
                   </mat-form-field>
                 </div>
                 <div class="col" *ngIf="flag">
-                  <mat-form-field class="example-full-width">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
                     <mat-label>Vinculacion</mat-label>
                     <mat-select name="food" formControlName="vin">
                       <mat-option
