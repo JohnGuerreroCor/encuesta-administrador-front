@@ -1,108 +1,70 @@
 <app-navbar>
   <div class="container p-5">
-    <div class="row">
-      <div class="col">
+    <div class="row row-cols-1 row-cols-md-4">
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
+          class="card h-100 cursor-select card-usco-menu shadow"
           [routerLink]="['/cuestionario']"
+          #tooltip="matTooltip"
+          matTooltip="Creación de cuestionario, con sus respectivas fechas de inicio
+          y cierre."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow filter-green"
-                src="assets/circle-plus-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Crear cuestionario
-                </h6>
-                <p style="font-size: 11px">
-                  Creación de cuestionario, con sus respectivas fechas de inicio
-                  y cierre.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/previsualizacion']"
-        >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/eye-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Previsualizar cuestionario
-                </h6>
-                <p style="font-size: 11px">
-                  Permite visualizar los cuestionarios ya creados.
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Crear cuestionario
+          </h5>
+          <img src="assets/circle-plus-solid.png" class="card-img-top p-4" />
         </div>
       </div>
-      <div class="col">
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
+          class="card h-100 cursor-select card-usco-menu shadow"
           [routerLink]="['/configuracion']"
+          #tooltip="matTooltip"
+          matTooltip="Permite establecer qué usuarios pueden responder al
+          cuestionario."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/sliders-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Configurar acceso
-                </h6>
-                <p style="font-size: 11px">
-                  Permite establecer qué usuarios pueden responder al
-                  cuestionario.
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Configurar acceso
+          </h5>
+          <img src="assets/sliders-solid.png" class="card-img-top p-4" />
         </div>
+      </div>
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/inicio']"
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/previsualizacion']"
+          #tooltip="matTooltip"
+          matTooltip="Permite visualizar los cuestionarios ya creados."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/house-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Inicio
-                </h6>
-                <p style="font-size: 11px">Volver al menú anterior.</p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Previsualizar cuestionario
+          </h5>
+          <img src="assets/eye-solid.png" class="card-img-top p-4" />
+        </div>
+      </div>
+      <div class="col mb-4">
+        <div
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/inicio']"
+          #tooltip="matTooltip"
+          matTooltip="Volver al menú anterior."
+          matTooltipPosition="below"
+        >
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Inicio
+          </h5>
+          <img src="assets/house-solid.png" class="card-img-top p-4" />
         </div>
       </div>
     </div>

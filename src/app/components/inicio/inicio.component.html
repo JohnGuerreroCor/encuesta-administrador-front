@@ -1,137 +1,95 @@
 <app-navbar>
   <div class="container p-5">
-    <div class="row">
-      <div class="col">
+    <div class="row row-cols-1 row-cols-md-4">
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
+          class="card h-100 cursor-select card-usco-menu shadow"
           [routerLink]="['/cuestionarios']"
+          #tooltip="matTooltip"
+          matTooltip="Crear cuestionario, configura el acceso a usuarios y
+          parametriza la fecha de inicio y cierre del mismo."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow filter-green"
-                src="assets/file-lines-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Cuestionarios
-                </h6>
-                <p style="font-size: 11px">
-                  Crear cuestionario, configura el acceso a usuarios y parametriza la fecha de inicio y cierre del mismo.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/respuesta']"
-        >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/file-pen-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Respuestas
-                </h6>
-                <p style="font-size: 11px">
-                  Creación de respuestas según las opciones para cada ítem establecido.
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Cuestionarios
+          </h5>
+          <img src="assets/file-lines-solid.png" class="card-img-top p-4" />
         </div>
       </div>
-      <div class="col">
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
+          class="card h-100 cursor-select card-usco-menu shadow"
           [routerLink]="['/preguntas']"
+          #tooltip="matTooltip"
+          matTooltip="Creación de preguntas de seleccion, escala likert y
+          parametrización de la misma."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/file-circle-question-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Preguntas
-                </h6>
-                <p style="font-size: 11px">
-                  Creación de preguntas de seleccion, escala likert y parametrización de la misma.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/relacion-pregunta-respuesta']"
-        >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/diagram-project-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Relación preguntas y respuestas
-                </h6>
-                <p style="font-size: 11px">
-                  Relaciona todas las repsuesta que puede tener un ítem de selección multipel con única respuesta.
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Preguntas
+          </h5>
+          <img
+            src="assets/file-circle-question-solid.png"
+            class="card-img-top p-4"
+          />
         </div>
       </div>
-    </div>
-    <div class="row mt-1">
-      <div class="col-sm-6 m-sm-auto">
+      <div class="col mb-4">
         <div
-          class="card mb-2 cursor-select card-usco-menu shadow"
-          [routerLink]="['/reportes']"
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/respuesta']"
+          #tooltip="matTooltip"
+          matTooltip="Creación de respuestas según las opciones para cada ítem
+          establecido."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow filter-green"
-                src="assets/chart-simple-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                Reportes
-                </h6>
-                <p style="font-size: 11px">
-                  Resultados en gráficos estadísticos y generación de un reporte descarble en excel.
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Respuestas
+          </h5>
+          <img src="assets/file-pen-solid.png" class="card-img-top p-4" />
+        </div>
+      </div>
+      <div class="col mb-4">
+        <div
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/relacion-pregunta-respuesta']"
+          #tooltip="matTooltip"
+          matTooltip="Relaciona todas las repsuesta que puede tener un ítem de
+          selección multipel con única respuesta."
+          matTooltipPosition="below"
+        >
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Relación pregunta y respuesta
+          </h5>
+          <img
+            src="assets/diagram-project-solid.png"
+            class="card-img-top p-4"
+          />
+        </div>
+      </div>
+      <div class="col mb-4">
+        <div
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/reportes']"
+          #tooltip="matTooltip"
+          matTooltip="Resultados en gráficos estadísticos y generación de un reporte
+          descarble en excel."
+          matTooltipPosition="below"
+        >
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Reportes
+          </h5>
+          <img src="assets/chart-simple-solid.png" class="card-img-top p-4" />
         </div>
       </div>
     </div>
