@@ -1,7 +1,10 @@
 export const environment = {
-  production: false,
   //DESCOMENTAR LOCAL
-  URL_BACKEND: 'http://localhost:8080/encuestas-administrador-1.0',
+  production: false,
+  //DESCOMENTAR PRODUCCIÓN
+  //production: true,
+  //DESCOMENTAR LOCAL
+  URL_BACKEND: 'http://localhost:8080/encuestas_admon-1.0',
   //DESCOMENTAR PRODUCCIÓN
   //URL_BACKEND : "https://sanagustin.usco.edu.co/encuestas_admon",
 };

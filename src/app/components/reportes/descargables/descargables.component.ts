@@ -104,7 +104,6 @@ export class DescargablesComponent implements OnInit {
     });
     this.respuestaService.generarDatosGrafica(11).subscribe((data) => {
       this.lstDatosGrafica = data;
-      // console.log(this.lstDatosGrafica);
     });
   }
   private initForm(): void {
@@ -122,7 +121,6 @@ export class DescargablesComponent implements OnInit {
     let usuario: number = this.form.get('tus')!.value;
     let cuestionario = this.form.get('cuestionario')!.value;
     let programa = this.form.get('programa')!.value;
-    // console.log(titulo + usuario + cuestionario + programa);
     this.loadingUsco(null);
     this.validador = true;
     this.vistaResultados = false;
@@ -151,8 +149,6 @@ export class DescargablesComponent implements OnInit {
 
         break;
       case 2:
-        // console.log(cuestionario);
-
         this.respuestaService
           .generarExcelPorCuestionario(titulo, cuestionario)
           .subscribe((data) => {
@@ -163,8 +159,6 @@ export class DescargablesComponent implements OnInit {
           });
         break;
       case 3:
-        // console.log(programa);
-
         this.respuestaService
           .generarExcelPorPrograma(programa, titulo)
           .subscribe((data) => {

@@ -102,7 +102,6 @@ export class RespuestasService {
   }
 
   generarExcelPorPrograma(programa: number, titulo: string): Observable<any> {
-    console.log('Service', programa, titulo, this.uaa);
     return this.http.get<any>(
       `${this.url}/reporte-p/${programa}/${this.uaa}/${titulo}`,
       { headers: this.aggAutorizacionHeader(), responseType: 'blob' as 'json' }
@@ -112,7 +111,6 @@ export class RespuestasService {
   // DETALLADO
 
   generarExcelDetallado(titulo: string): Observable<any> {
-    console.log('Detallado');
     return this.http.get<any>(
       `${this.url}/reporte-detallado/${this.uaa}/${titulo}`,
       { headers: this.aggAutorizacionHeader(), responseType: 'blob' as 'json' }
@@ -143,7 +141,6 @@ export class RespuestasService {
     programa: number,
     titulo: string
   ): Observable<any> {
-    console.log('Service', programa, titulo, this.uaa);
     return this.http.get<any>(
       `${this.url}/reporte-p-detallado/${programa}/${this.uaa}/${titulo}`,
       { headers: this.aggAutorizacionHeader(), responseType: 'blob' as 'json' }

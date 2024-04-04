@@ -1,19 +1,20 @@
 <app-navbar>
-  <div id="content-wrap" class="container mt-3 mb-5 text-center" #target>
-    <div class="card rounded-2 p-0 shadow-sm mt-5">
+  <div class="container mt-3 text-center" #target>
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
       <div
-        class="card-header ml-4 mb-3 mr-4 cursor-select"
+        class="card-header ml-4 mr-4 cursor-select"
         [routerLink]="['/cuestionarios']"
         routerLinkActive="router-link-active"
       >
-        <h4 class="font-usco-default">
-          <strong>Configuración Cuestionario</strong>
-        </h4>
+        <h4 class="font-usco-default">Configuración Cuestionario</h4>
       </div>
-      <div class="card-body ls">
-        <div class="row">
-          <div class="col">
-            <form [formGroup]="form" class="pl-4 pr-4">
+      <div class="card-body">
+        <div class="container">
+          <fieldset class="scheduler-border shadow-sm">
+            <legend class="scheduler-border font-usco-vt">
+              Formulario configuración cuestionario
+            </legend>
+            <form [formGroup]="form">
               <div class="row">
                 <div class="col">
                   <mat-form-field
@@ -22,10 +23,11 @@
                   >
                     <mat-label>UAT</mat-label>
                     <mat-select name="food" formControlName="uat">
-                      <mat-option (click)="onUaaNull()" [value]="0">
+                      <mat-option (click)="onUaaNull()" [value]="0" class="p-2">
                         NINGUNA
                       </mat-option>
                       <mat-option
+                        class="p-2"
                         (click)="onUaa()"
                         *ngFor="let uat of lstUaaTipo"
                         [value]="uat.codigo"
@@ -43,6 +45,7 @@
                     <mat-label>UAA</mat-label>
                     <mat-select name="food" formControlName="uaa">
                       <mat-option
+                        class="p-2"
                         *ngFor="let uaa of lstUaa"
                         [value]="uaa.codigo"
                       >
@@ -61,6 +64,7 @@
                     <mat-label>Cuestionario</mat-label>
                     <mat-select name="food" formControlName="cue">
                       <mat-option
+                        class="p-2"
                         *ngFor="let cue of lstCuestionario"
                         [value]="cue.codigo"
                       >
@@ -103,7 +107,7 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="row mt-4 mb-5 text-center">
+              <div class="row">
                 <div class="col">
                   <button
                     type="button"
@@ -130,14 +134,39 @@
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
+          </fieldset>
+          <fieldset class="scheduler-border shadow-sm">
+            <legend class="scheduler-border font-usco-vt">
+              Configuraciones de acceso
+            </legend>
+            <div class="row mt-2 ml-5 mr-5 pl-5 pr-5">
+              <div class="col">
+                <div class="form-group">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Campo de búsqueda</mat-label>
+                    <input
+                      matInput
+                      #input
+                      (keyup)="filtrar($event)"
+                      maxlength="50"
+                      type="text"
+                      required
+                    />
+                    <button matSuffix mat-icon-button>
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-hint align="end">{{ input.value.length }}/50</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
             <table
               mat-table
               [dataSource]="dataSource"
-              class="table table-hover shadow"
+              class="table table-hover shadow-sm"
             >
               <ng-container matColumnDef="codigo">
                 <th mat-header-cell *matHeaderCellDef>No</th>
@@ -149,24 +178,23 @@
               <ng-container matColumnDef="uaa">
                 <th mat-header-cell *matHeaderCellDef>UAA</th>
                 <td mat-cell *matCellDef="let element">
-                  {{ element.uaa.codigo }}.{{ element.uaa.nombre }}
+                  <span *ngIf="element.uaa.codigo != 0"
+                    >{{ element.uaa.codigo }} - {{ element.uaa.nombre }}</span
+                  >
+                  <span *ngIf="element.uaa.codigo == 0">-</span>
                 </td>
               </ng-container>
 
               <ng-container matColumnDef="cue">
                 <th mat-header-cell *matHeaderCellDef>Cuestionario</th>
                 <td mat-cell *matCellDef="let element">
-                  {{ element.cuestionario.codigo }}.{{
-                    element.cuestionario.nombre
-                  }}
+                  {{ element.cuestionario.nombre }}
                 </td>
               </ng-container>
               <ng-container matColumnDef="tus">
                 <th mat-header-cell *matHeaderCellDef>Tipo de Usuario</th>
                 <td mat-cell *matCellDef="let element">
-                  {{ element.usuarioTipo.codigo }}.{{
-                    element.usuarioTipo.nombre
-                  }}
+                  {{ element.usuarioTipo.nombre }}
                 </td>
               </ng-container>
 
@@ -180,7 +208,10 @@
               <ng-container matColumnDef="vinculo">
                 <th mat-header-cell *matHeaderCellDef>Vinculo Docente</th>
                 <td mat-cell *matCellDef="let element">
-                  {{ element.vinculo.codigo }}.{{ element.vinculo.nombre }}
+                  <span *ngIf="element.vinculo.codigo != 0">{{
+                    element.vinculo.nombre
+                  }}</span>
+                  <span *ngIf="element.vinculo.codigo == 0">-</span>
                 </td>
               </ng-container>
 
@@ -208,7 +239,7 @@
               [pageSizeOptions]="[10, 20, 30]"
               showFirstLastButtons
             ></mat-paginator>
-          </div>
+          </fieldset>
         </div>
       </div>
     </div>

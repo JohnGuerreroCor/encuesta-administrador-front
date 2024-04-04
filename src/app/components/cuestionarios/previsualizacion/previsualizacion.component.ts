@@ -133,7 +133,6 @@ export class PrevisualizacionComponent implements OnInit {
     this.preguntaService.findbyCues(this.form.get('codigo')!.value).subscribe(
       (data) => {
         this.lstPreguntass = data;
-        //console.log(JSON.stringify(data));
         for (const e of data) {
           if (e.tipo == 2) {
             this.preguntaService

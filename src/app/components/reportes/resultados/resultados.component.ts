@@ -93,7 +93,6 @@ export class ResultadosComponent implements OnInit {
         this.validador = true;
         this.vistaResultados = true;
         this.lstDatosGrafica = datos;
-        //console.log(datos);
         datos.forEach((e, i) => {
           let op: Array<OpcionEncuesta> = [];
           datos[i].opciones.forEach((a, x) => {
@@ -139,12 +138,10 @@ export class ResultadosComponent implements OnInit {
       {},
     ];
 
-    console.log(typeof pieChartColor);
-
     return pieChartColor;
   }
 
-  setTituloResultados(nombreCuestionario: string){
+  setTituloResultados(nombreCuestionario: string) {
     this.titulo = nombreCuestionario;
   }
 
@@ -167,7 +164,7 @@ export class ResultadosComponent implements OnInit {
     });
 
     // Guardar el archivo utilizando FileSaver.js
-    saveAs(blob, 'Resultado General'+this.titulo+'.xlsx');
+    saveAs(blob, 'Resultado General' + this.titulo + '.xlsx');
   }
 
   find() {
@@ -189,9 +186,7 @@ export class ResultadosComponent implements OnInit {
   }: {
     event: MouseEvent;
     active: {}[];
-  }): void {
-    console.log(event, active);
-  }
+  }): void {}
 
   pieChartColors: Array<{}> = new Array();
 
@@ -201,7 +196,5 @@ export class ResultadosComponent implements OnInit {
   }: {
     event: MouseEvent;
     active: {}[];
-  }): void {
-    console.log(event, active);
-  }
+  }): void {}
 }

@@ -1,20 +1,21 @@
 <app-navbar>
-  <div id="content-wrap" class="container mt-3 mb-5 text-center" #target>
-    <div class="card rounded-2 p-0 shadow-sm mt-5">
+  <div class="container mt-3 text-center" #target>
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
       <div
-        class="card-header ml-4 mb-3 mr-4 cursor-select"
+        class="card-header ml-4 mr-4 cursor-select"
         [routerLink]="['/preguntas']"
         routerLinkActive="router-link-active"
       >
-        <h4 class="font-usco-default">
-          <strong>Creación Pregunta</strong>
-        </h4>
+        <h4 class="font-usco-default">Creación Pregunta</h4>
       </div>
-      <div class="card-body ls">
-        <div class="row">
-          <div class="col">
-            <form [formGroup]="form2" class="pl-4 pr-4">
-              <div class="row">
+      <div class="card-body">
+        <div class="container">
+          <fieldset class="scheduler-border shadow-sm">
+            <legend class="scheduler-border font-usco-vt">
+              Formulario configuración cuestionario
+            </legend>
+            <form [formGroup]="form2">
+              <div class="row pt-2">
                 <div class="col">
                   <mat-form-field
                     class="example-full-width"
@@ -23,6 +24,7 @@
                     <mat-label>Cuestionario</mat-label>
                     <mat-select formControlName="cuestionario">
                       <mat-option
+                        class="p-2"
                         *ngFor="let cue of lstCuestionario"
                         (click)="onCuest()"
                         [value]="cue.codigo"
@@ -48,302 +50,318 @@
               <div *ngIf="!cueVerificacion" class="row text-center mt-3">
                 <div class="col">
                   <h5 class="font-usco-default font-usco-gr">
-                    Espacio para la visualización del cuestionario
+                    Espacio para la visualización del formulario
                   </h5>
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-        <div *ngIf="cueVerificacion">
-          <div class="row">
-            <div class="col">
-              <form [formGroup]="form" class="pl-4 pr-4">
-                <div *ngIf="cueVerificacion">
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Codigo Pregunta</mat-label>
-                        <textarea
-                          matInput
-                          #message
-                          maxlength="100"
-                          formControlName="id"
-                          placeholder="2.02.3"
-                        ></textarea>
-                      </mat-form-field>
-                    </div>
-                    <div class="col">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Pregunta</mat-label>
-                        <textarea
-                          matInput
-                          #message
-                          maxlength="2499"
-                          formControlName="descripcion"
-                          placeholder="Digite la pregunta..."
-                        ></textarea>
-                      </mat-form-field>
-                    </div>
+            <form [formGroup]="form" *ngIf="cueVerificacion">
+              <div>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
+                      <mat-label>Codigo Pregunta</mat-label>
+                      <textarea
+                        matInput
+                        #message
+                        maxlength="100"
+                        formControlName="id"
+                        placeholder="2.02.3"
+                      ></textarea>
+                    </mat-form-field>
                   </div>
-                  <div class="row">
-                    <div class="col">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Texto Adicional</mat-label>
-                        <textarea
-                          matInput
-                          #message
-                          maxlength="2499"
-                          formControlName="texto"
-                          placeholder="Texto adicional..."
-                        ></textarea>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Tipo de Respuesta</mat-label>
-                        <mat-select name="food" formControlName="trespuesta">
-                          <mat-option
-                            *ngFor="let tipoR of lstTipoRespuesta"
-                            [value]="tipoR.codigo"
-                          >
-                            {{ tipoR.nombre }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="col">
-                      <mat-form-field
-                        class="example-full-width"
-                        appearance="outline"
-                      >
-                        <mat-label>Tipo De Pregunta</mat-label>
-                        <mat-select formControlName="tipo">
-                          <mat-option
-                            [value]="0"
-                            (click)="onDependencia(); onGre()"
-                          >
-                            Principal
-                          </mat-option>
-                          <mat-option
-                            [value]="1"
-                            (click)="onDependencia(); onGre()"
-                          >
-                            Sub Pregunta
-                          </mat-option>
-                          <mat-option
-                            [value]="2"
-                            (click)="onDependencia(); onGre()"
-                          >
-                            Pregunta Principal con Sub Pregunta
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <div class="col mt-4 text-center">
-                      <mat-slide-toggle
-                        formControlName="obligatorio"
-                        [(ngModel)]="isChecked"
-                      >
-                        Obligatorio
-                      </mat-slide-toggle>
-                    </div>
-                  </div>
-                  <div *ngIf="depende">
-                    <div class="row pl-3 pr-3">
-                      <div class="col">
-                        <mat-form-field
-                          class="example-full-width"
-                          appearance="outline"
-                        >
-                          <mat-label>Pregunta de la cual depende</mat-label>
-                          <mat-select formControlName="depende">
-                            <mat-option
-                              *ngFor="let pre of lstPreguntas"
-                              [value]="pre.codigo"
-                            >
-                              {{ pre.descripcion }}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </div>
-                  <div *ngIf="gre">
-                    <div class="row pl-3 pr-3">
-                      <div class="col">
-                        <mat-form-field
-                          class="example-full-width"
-                          appearance="outline"
-                        >
-                          <mat-label>Grupo de la Escala</mat-label>
-                          <mat-select formControlName="grup">
-                            <mat-option
-                              *ngFor="let gre of lstGre"
-                              [value]="gre.codigo"
-                            >
-                              {{ gre.nombre }}
-                            </mat-option>
-                          </mat-select>
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row text-center mt-4 mb-5">
                   <div class="col">
-                    <button
-                      class="btn btn-success"
-                      [disabled]="!form.valid"
-                      (click)="onCrear()"
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
                     >
-                      <i class="far fa-save"></i> Registrar
-                    </button>
-                    <button
-                      (click)="onCancelar()"
-                      class="btn btn-warning ml-2 mr-2"
-                    >
-                      <i class="far fa-times-circle"></i> Cancelar
-                    </button>
-
-                    <button
-                      (click)="onEliminar()"
-                      *ngIf="editar"
-                      class="btn btn-danger"
-                    >
-                      <i class="far fa-trash-alt"></i> Borrar
-                    </button>
+                      <mat-label>Pregunta</mat-label>
+                      <textarea
+                        matInput
+                        #message
+                        maxlength="2499"
+                        formControlName="descripcion"
+                        placeholder="Digite la pregunta..."
+                      ></textarea>
+                    </mat-form-field>
                   </div>
                 </div>
-              </form>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <table
-                mat-table
-                [dataSource]="dataSource"
-                class="table table-hover shadow"
-              >
-                <ng-container matColumnDef="codigo">
-                  <th mat-header-cell *matHeaderCellDef>No</th>
-                  <td mat-cell *matCellDef="let element; let i = index">
-                    {{ dataSource.filteredData.indexOf(element) + 1 }}
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="id">
-                  <th mat-header-cell *matHeaderCellDef>Codigo</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.identificador }}
-                  </td>
-                </ng-container>
-
-                <ng-container matColumnDef="descripcion">
-                  <th mat-header-cell *matHeaderCellDef>Descripcion</th>
-                  <td class="text-left" mat-cell *matCellDef="let element">
-                    {{ element.descripcion }}
-                  </td>
-                </ng-container>
-
-                <ng-container matColumnDef="textoAdicional">
-                  <th mat-header-cell *matHeaderCellDef>Texto Adicional</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.textoAdicional }}
-                  </td>
-                </ng-container>
-
-                <ng-container matColumnDef="tipo">
-                  <th mat-header-cell *matHeaderCellDef>Tipo</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.tipo }}
-                  </td>
-                </ng-container>
-
-                <ng-container matColumnDef="tipoRespuesta">
-                  <th mat-header-cell *matHeaderCellDef>Tipo Respuesta</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.tipoRespuesta.nombre }}
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="gre">
-                  <th mat-header-cell *matHeaderCellDef>Grupo de la Escala</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.gre.codigo }}.
-                    {{ element.gre.nombre }}
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="depende">
-                  <th
-                    mat-header-cell
-                    *matHeaderCellDef
-                    data-toggle="tooltip"
-                    data-placement="top"
-                    title="Pregunta de la que depende"
-                  >
-                    PD <i class="far fa-question-circle"></i>
-                  </th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.depende }}
-                  </td>
-                </ng-container>
-
-                <ng-container matColumnDef="cuestionario">
-                  <th mat-header-cell *matHeaderCellDef>Cuestionario</th>
-                  <td mat-cell class="text-left" *matCellDef="let element">
-                    {{ element.cuestionario.codigo }}
-                    <!-- {{ element.cuestionario.nombre }} -->
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="obligatorio">
-                  <th mat-header-cell *matHeaderCellDef>Obligatorio</th>
-                  <td mat-cell *matCellDef="let element">
-                    <p *ngIf="element.obligatorio == 1">Si</p>
-                    <p *ngIf="element.obligatorio == 0">No</p>
-                  </td>
-                </ng-container>
-
-                <!--editar-->
-                <ng-container matColumnDef="editar">
-                  <th mat-header-cell *matHeaderCellDef>Editar</th>
-                  <td mat-cell *matCellDef="let element">
-                    <div class="example-button-container">
-                      <button
-                        class="btn btn-usco-vt btn-sm"
-                        (click)="onEditarClick(element)"
-                        (click)="scroll(target)"
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
+                      <mat-label>Texto Adicional</mat-label>
+                      <textarea
+                        matInput
+                        #message
+                        maxlength="2499"
+                        formControlName="texto"
+                        placeholder="Texto adicional..."
+                      ></textarea>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
+                      <mat-label>Tipo de Respuesta</mat-label>
+                      <mat-select name="food" formControlName="trespuesta">
+                        <mat-option
+                          *ngFor="let tipoR of lstTipoRespuesta"
+                          [value]="tipoR.codigo"
+                        >
+                          {{ tipoR.nombre }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field
+                      class="example-full-width"
+                      appearance="outline"
+                    >
+                      <mat-label>Tipo De Pregunta</mat-label>
+                      <mat-select formControlName="tipo">
+                        <mat-option
+                          [value]="0"
+                          (click)="onDependencia(); onGre()"
+                        >
+                          Principal
+                        </mat-option>
+                        <mat-option
+                          [value]="1"
+                          (click)="onDependencia(); onGre()"
+                        >
+                          Sub Pregunta
+                        </mat-option>
+                        <mat-option
+                          [value]="2"
+                          (click)="onDependencia(); onGre()"
+                        >
+                          Pregunta Principal con Sub Pregunta
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col mt-4 text-center">
+                    <mat-slide-toggle
+                      formControlName="obligatorio"
+                      [(ngModel)]="isChecked"
+                    >
+                      Obligatorio
+                    </mat-slide-toggle>
+                  </div>
+                </div>
+                <div *ngIf="depende">
+                  <div class="row pl-3 pr-3">
+                    <div class="col">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
                       >
-                        <i class="fas fa-pencil-alt fa-xs"></i>
-                      </button>
+                        <mat-label>Pregunta de la cual depende</mat-label>
+                        <mat-select formControlName="depende">
+                          <mat-option
+                            *ngFor="let pre of lstPreguntas"
+                            [value]="pre.codigo"
+                          >
+                            {{ pre.descripcion }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
                     </div>
-                  </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr
-                  mat-row
-                  *matRowDef="let row; columns: displayedColumns"
-                ></tr>
-              </table>
+                  </div>
+                </div>
+                <div *ngIf="gre">
+                  <div class="row pl-3 pr-3">
+                    <div class="col">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Grupo de la Escala</mat-label>
+                        <mat-select formControlName="grup">
+                          <mat-option
+                            *ngFor="let gre of lstGre"
+                            [value]="gre.codigo"
+                          >
+                            {{ gre.nombre }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row text-center">
+                <div class="col">
+                  <button
+                    class="btn btn-success"
+                    [disabled]="!form.valid"
+                    (click)="onCrear()"
+                  >
+                    <i class="far fa-save"></i> Registrar
+                  </button>
+                  <button
+                    (click)="onCancelar()"
+                    class="btn btn-warning ml-2 mr-2"
+                  >
+                    <i class="far fa-times-circle"></i> Cancelar
+                  </button>
 
-              <mat-paginator
-                [pageSizeOptions]="[10, 20, 30]"
-                showFirstLastButtons
-              ></mat-paginator>
+                  <button
+                    (click)="onEliminar()"
+                    *ngIf="editar"
+                    class="btn btn-danger"
+                  >
+                    <i class="far fa-trash-alt"></i> Borrar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </fieldset>
+          <fieldset class="scheduler-border shadow-sm" *ngIf="cueVerificacion">
+            <legend class="scheduler-border font-usco-vt">
+              Formulario creación cuestionario
+            </legend>
+            <div class="row mt-2 ml-5 mr-5 pl-5 pr-5">
+              <div class="col">
+                <div class="form-group">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Campo de búsqueda</mat-label>
+                    <input
+                      matInput
+                      #input
+                      (keyup)="filtrar($event)"
+                      maxlength="50"
+                      type="text"
+                      required
+                    />
+                    <button matSuffix mat-icon-button>
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-hint align="end">{{ input.value.length }}/50</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
             </div>
-          </div>
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              class="table table-hover shadow-sm"
+            >
+              <ng-container matColumnDef="codigo">
+                <th mat-header-cell *matHeaderCellDef>No</th>
+                <td mat-cell *matCellDef="let element; let i = index">
+                  {{ dataSource.filteredData.indexOf(element) + 1 }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Codigo</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.identificador }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="descripcion">
+                <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+                <td class="text-left" mat-cell *matCellDef="let element">
+                  {{ element.descripcion }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="textoAdicional">
+                <th mat-header-cell *matHeaderCellDef>Texto Adicional</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.textoAdicional }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="tipo">
+                <th mat-header-cell *matHeaderCellDef>Tipo</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.tipo }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="tipoRespuesta">
+                <th mat-header-cell *matHeaderCellDef>Tipo Respuesta</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.tipoRespuesta.nombre }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="gre">
+                <th mat-header-cell *matHeaderCellDef>Grupo de la Escala</th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.gre.codigo }}.
+                  {{ element.gre.nombre }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="depende">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  data-toggle="tooltip"
+                  data-placement="top"
+                  title="Pregunta de la que depende"
+                >
+                  PD <i class="far fa-question-circle"></i>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.depende }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="cuestionario">
+                <th mat-header-cell *matHeaderCellDef>Cuestionario</th>
+                <td mat-cell class="text-left" *matCellDef="let element">
+                  {{ element.cuestionario.codigo }}
+                  <!-- {{ element.cuestionario.nombre }} -->
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="obligatorio">
+                <th mat-header-cell *matHeaderCellDef>Obligatorio</th>
+                <td mat-cell *matCellDef="let element">
+                  <p *ngIf="element.obligatorio == 1">Si</p>
+                  <p *ngIf="element.obligatorio == 0">No</p>
+                </td>
+              </ng-container>
+
+              <!--editar-->
+              <ng-container matColumnDef="editar">
+                <th mat-header-cell *matHeaderCellDef>Editar</th>
+                <td mat-cell *matCellDef="let element">
+                  <div class="example-button-container">
+                    <button
+                      class="btn btn-usco-vt btn-sm"
+                      (click)="onEditarClick(element)"
+                      (click)="scroll(target)"
+                    >
+                      <i class="fas fa-pencil-alt fa-xs"></i>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+            <mat-paginator
+              [pageSizeOptions]="[10, 20, 30]"
+              showFirstLastButtons
+            ></mat-paginator>
+          </fieldset>
         </div>
       </div>
     </div>

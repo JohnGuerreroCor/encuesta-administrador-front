@@ -1,110 +1,71 @@
 <app-navbar>
   <div class="container p-5">
-    <div class="row">
-      <div class="col">
+    <div class="row row-cols-1 row-cols-md-4">
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
+          class="card h-100 cursor-select card-usco-menu shadow"
           [routerLink]="['/resultados']"
+          #tooltip="matTooltip"
+          matTooltip="Permite obtener los resultados en gráficos tabulados (barras,
+          porcentaje y de dona)."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow filter-green"
-                src="assets/chart-pie-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Resultados
-                </h6>
-                <p style="font-size: 11px">
-                  Permite obtener los resultados en gráficos tabulados (barras,
-                  porcentaje y de dona).
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/agrupados']"
-        >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow filter-green"
-                src="assets/list-check-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Descargar Excel Agrupado
-                </h6>
-                <p style="font-size: 11px">
-                  Permite descargar el reporte por tipo de preguntas y de manera
-                  ordenada y agrupada.
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Resultados
+          </h5>
+          <img src="assets/chart-pie-solid.png" class="card-img-top p-4" />
         </div>
       </div>
-      <div class="col">
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/descargables']"
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/agrupados']"
+          #tooltip="matTooltip"
+          matTooltip="Permite descargar el reporte por tipo de preguntas y de manera
+          ordenada y agrupada."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow filter-green"
-                src="assets/file-csv-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Descargar Excel General
-                </h6>
-                <p style="font-size: 11px">
-                  Permite descargar el reporte general, según el cuestionario
-                  aplicado.
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Descargar Excel Agrupado
+          </h5>
+          <img src="assets/list-check-solid.png" class="card-img-top p-4" />
         </div>
-
+      </div>
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/inicio']"
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/descargables']"
+          #tooltip="matTooltip"
+          matTooltip="Permite descargar el reporte general, según el cuestionario
+          aplicado."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/house-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Inicio
-                </h6>
-                <p style="font-size: 11px">Regresar al menú anterior.</p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Descargar Excel General
+          </h5>
+          <img src="assets/file-csv-solid.png" class="card-img-top p-4" />
+        </div>
+      </div>
+      <div class="col mb-4">
+        <div
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/inicio']"
+          #tooltip="matTooltip"
+          matTooltip="Volver al menú anterior."
+          matTooltipPosition="below"
+        >
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Inicio
+          </h5>
+          <img src="assets/house-solid.png" class="card-img-top p-4" />
         </div>
       </div>
     </div>

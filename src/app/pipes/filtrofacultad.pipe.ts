@@ -10,7 +10,6 @@ export class FiltrofacultadPipe implements PipeTransform {
     }
     const resultPosts = [];
     for (const post of value) {
-      // console.log('Pasa por el FOR');
       if (post.uaa.uaa_dependencia === arg) {
         resultPosts.push(post);
       }

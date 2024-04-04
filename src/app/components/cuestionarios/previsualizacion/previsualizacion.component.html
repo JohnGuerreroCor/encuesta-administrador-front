@@ -1,20 +1,29 @@
 <app-navbar>
-  <div id="content-wrap" class="container mt-3 mb-5 text-center" #target>
-    <div class="card rounded-2 p-0 shadow-sm mt-5">
+  <button
+    class="btn btn-flotante-usco"
+    [useExistingCss]="true"
+    printSectionId="print-section"
+    ngxPrint
+  >
+    <i class="fa-solid fa-print"></i> Imprimir
+  </button>
+  <div class="container mt-3 text-center" #target>
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
       <div
-        class="card-header ml-4 mb-3 mr-4 cursor-select"
+        class="card-header ml-4 mr-4 cursor-select"
         [routerLink]="['/cuestionarios']"
         routerLinkActive="router-link-active"
       >
-        <h4 class="font-usco-default">
-          <strong>Previsualización Cuestionario</strong>
-        </h4>
+        <h4 class="font-usco-default">Previsualización Cuestionario</h4>
       </div>
-      <div class="card-body ls">
-        <div class="row">
-          <div class="col">
+      <div class="card-body">
+        <div class="container">
+          <fieldset class="scheduler-border shadow-sm">
+            <legend class="scheduler-border font-usco-vt">
+              Seleccione el cuestionario
+            </legend>
             <form [formGroup]="form" class="pl-4 pr-4">
-              <div class="row">
+              <div class="row pt-2">
                 <div class="col">
                   <mat-form-field
                     class="example-full-width"
@@ -22,7 +31,7 @@
                   >
                     <mat-label>Cuestionarios</mat-label>
                     <mat-select formControlName="codigo">
-                      <mat-option
+                      <mat-option class="p-2"
                         *ngFor="let cu of lstCuestionarios"
                         [value]="cu.codigo"
                       >
@@ -35,7 +44,7 @@
               <div class="row">
                 <div class="col">
                   <button
-                    class="btn btn-usco-vt m-2"
+                    class="btn btn-usco-vt"
                     [disabled]="!form.valid"
                     (click)="onMostrar()"
                   >
@@ -43,27 +52,27 @@
                   </button>
                 </div>
               </div>
-              <div *ngIf="!flag" class="row text-center precarga-img-usco">
-                <div class="col" *ngIf="!validador">
-                  <img
-                    src="https://www.usco.edu.co/imagen-institucional/logo/universidad-surcolombiana-v.png"
-                    alt=""
-                  />
-                </div>
-              </div>
-              <div *ngIf="!flag" class="row text-center mt-3">
-                <div class="col">
-                  <h5 class="font-usco-default font-usco-gr">
-                    Espacio para la visualización del cuestionario
-                  </h5>
-                </div>
-              </div>
             </form>
-          </div>
+          </fieldset>
         </div>
       </div>
     </div>
-    <div class="container pl-5 pr-5 mt-5" id="print-section">
+    <div *ngIf="!flag" class="row text-center precarga-img-usco">
+      <div class="col" *ngIf="!validador">
+        <img
+          src="https://www.usco.edu.co/imagen-institucional/logo/universidad-surcolombiana-v.png"
+          alt=""
+        />
+      </div>
+    </div>
+    <div *ngIf="!flag" class="row text-center mt-3">
+      <div class="col">
+        <h5 class="font-usco-default font-usco-gr">
+          Espacio para la visualización del cuestionario
+        </h5>
+      </div>
+    </div>
+    <div class="container pl-5 pr-5" id="print-section">
       <div *ngIf="flag" class="row prev-header-encuesta-usco mt-2 mb-3 shadow">
         <div class="col">
           <div
@@ -241,18 +250,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row mb-5" *ngIf="flag">
-    <div class="col text-center">
-      <button
-        class="btn btn-info"
-        [useExistingCss]="true"
-        printSectionId="print-section"
-        ngxPrint
-      >
-        <i class="fa-solid fa-print"></i> Imprimir
-      </button>
     </div>
   </div>
 </app-navbar>

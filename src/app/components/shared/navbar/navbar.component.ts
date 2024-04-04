@@ -16,11 +16,11 @@ import swal from 'sweetalert2';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  public perCodigo: any = this.auth.user.per_codigo;
-  public perCodigoAntigua: any = '' + this.auth.user.per_codigo;
-  public nombre: any = this.auth.user.nombre;
-  public apellido: any = this.auth.user.apellido;
-  public uaa: any = this.auth.user.uaa;
+  public perCodigo: any = this.auth.user.personaCodigo;
+  public perCodigoAntigua: any = '' + this.auth.user.personaCodigo;
+  public nombre: any = this.auth.user.personaNombre;
+  public apellido: any = this.auth.user.personaApellido;
+  public uaa: any = this.auth.user.uaaNombre;
   public roles: any[] = this.auth.user.roles;
   public rol: any = this.roles.toString();
   today = new Date();

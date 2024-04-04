@@ -1,109 +1,71 @@
 <app-navbar>
   <div class="container p-5">
-    <div class="row">
-      <div class="col">
+    <div class="row row-cols-1 row-cols-md-4">
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
+          class="card h-100 cursor-select card-usco-menu shadow"
           [routerLink]="['/pregunta']"
+          #tooltip="matTooltip"
+          matTooltip="Permite parametrizar cada una de las preguntas según su tipo
+          (selección multiple o texto)."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow filter-green"
-                src="assets/circle-plus-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Crear pregunta
-                </h6>
-                <p style="font-size: 11px">
-                  Permite parametrizar cada una de las preguntas según su tipo
-                  (selección multiple o texto).
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/grupo-likert']"
-        >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/object-ungroup-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Crear grupo para escala likert
-                </h6>
-                <p style="font-size: 11px">
-                  Parametriza el conjunto de preguntas y las agrupa por un
-                  criterio específico.
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Crear pregunta
+          </h5>
+          <img src="assets/circle-plus-solid.png" class="card-img-top p-4" />
         </div>
       </div>
-      <div class="col">
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/escala-likert']"
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/grupo-likert']"
+          #tooltip="matTooltip"
+          matTooltip="Parametriza el conjunto de preguntas y las agrupa por un
+          criterio específico."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/sitemap-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Configurar escala likert
-                </h6>
-                <p style="font-size: 11px">
-                  Parametriza la escala de valoración que va a tener cada itém
-                  según el criterio a evaluar.
-                </p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Crear grupo
+          </h5>
+          <img src="assets/object-ungroup-solid.png" class="card-img-top p-4" />
         </div>
+      </div>
+      <div class="col mb-4">
         <div
-          class="card mb-4 cursor-select card-usco-menu shadow"
-          [routerLink]="['/inicio']"
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/escala-likert']"
+          #tooltip="matTooltip"
+          matTooltip=" Parametriza la escala de valoración que va a tener cada itém
+          según el criterio a evaluar."
+          matTooltipPosition="below"
         >
-          <div class="row">
-            <div class="col-md-4 text-center">
-              <img
-                class="rounded w-100 p-3 shadow"
-                src="assets/house-solid.png"
-              />
-            </div>
-            <div class="col-md-8 mt-3 text-left p-0">
-              <div class="card-block pr-4">
-                <h6
-                  class="card-title text-left font-usco-vt font-weight-bold cursor-select"
-                >
-                  Inicio
-                </h6>
-                <p style="font-size: 11px">Regresar al menú anterior.</p>
-              </div>
-            </div>
-          </div>
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Escala likert
+          </h5>
+          <img src="assets/sitemap-solid.png" class="card-img-top p-4" />
+        </div>
+      </div>
+      <div class="col mb-4">
+        <div
+          class="card h-100 cursor-select card-usco-menu shadow"
+          [routerLink]="['/inicio']"
+          #tooltip="matTooltip"
+          matTooltip="Volver al menú anterior."
+          matTooltipPosition="below"
+        >
+          <h5
+            class="card-header pt-3 text-center font-usco-vt font-weight-bold"
+          >
+            Inicio
+          </h5>
+          <img src="assets/house-solid.png" class="card-img-top p-4" />
         </div>
       </div>
     </div>

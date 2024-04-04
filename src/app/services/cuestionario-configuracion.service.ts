@@ -15,9 +15,10 @@ export class CuestionarioConfiguracionService {
 
   uaa: number = this.authservice.obtenerUaa();
   userLogeado: String = this.authservice.user.username;
+  role: any = this.authservice.user.roles;
 
   constructor(private http: HttpClient, private authservice: AuthService) {}
-  
+
   private aggAutorizacionHeader(): HttpHeaders {
     let token = this.authservice.Token;
     if (token != null) {
@@ -27,10 +28,19 @@ export class CuestionarioConfiguracionService {
   }
 
   find(): Observable<CuestionarioConfiguracion[]> {
-    return this.http.get<CuestionarioConfiguracion[]>(
-      `${this.url}/find/${this.uaa}`,
-      { headers: this.aggAutorizacionHeader() }
-    );
+    console.log(this.role[0]);
+    
+    if (this.role[0] == 'ROLE_ENCUESTAS_SUPER_ADMINISTRADOR') {
+      return this.http.get<CuestionarioConfiguracion[]>(
+        `${this.url}/buscar-configuraciones`,
+        { headers: this.aggAutorizacionHeader() }
+      );
+    } else {
+      return this.http.get<CuestionarioConfiguracion[]>(
+        `${this.url}/find/${this.uaa}`,
+        { headers: this.aggAutorizacionHeader() }
+      );
+    }
   }
 
   findbyCodigo(codigo: number): Observable<CuestionarioConfiguracion[]> {

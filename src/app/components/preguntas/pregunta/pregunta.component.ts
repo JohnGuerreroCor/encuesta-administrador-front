@@ -85,6 +85,15 @@ export class PreguntaComponent implements OnInit {
     private router: Router
   ) {}
 
+  filtrar(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
   ngOnInit() {
     if (this.auth.validacionToken()) {
       this.listarTipoRespuestas();
@@ -244,8 +253,6 @@ export class PreguntaComponent implements OnInit {
     pregunta = preVlidar;
 
     if (!this.editar) {
-      console.log(pregunta.gre);
-
       this.resgistrar(pregunta);
       this.onCancelar();
       this.find();

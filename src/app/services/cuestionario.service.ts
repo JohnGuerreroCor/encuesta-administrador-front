@@ -15,6 +15,7 @@ export class CuestionarioService {
 
   uaa: number = this.authservice.obtenerUaa();
   userLogeado: String = this.authservice.user.username;
+  role: any = this.authservice.user.roles;
 
   constructor(private http: HttpClient, private authservice: AuthService) {}
 
@@ -27,20 +28,29 @@ export class CuestionarioService {
   }
 
   find(): Observable<Cuestionario[]> {
-    return this.http.get<Cuestionario[]>(`${this.url}/find/${this.uaa}`, {
-      headers: this.aggAutorizacionHeader(),
-    });
+    if (this.role[0] == 'ROLE_ENCUESTAS_SUPER_ADMINISTRADOR') {
+      return this.http.get<Cuestionario[]>(`${this.url}/buscar-todo`, {
+        headers: this.aggAutorizacionHeader(),
+      });
+    } else {
+      return this.http.get<Cuestionario[]>(`${this.url}/buscar/${this.uaa}`, {
+        headers: this.aggAutorizacionHeader(),
+      });
+    }
   }
 
   findbyCodigo(codigo: number): Observable<Cuestionario> {
-    return this.http.get<Cuestionario>(`${this.url}/find-codigo/${codigo}`, {
-      headers: this.aggAutorizacionHeader(),
-    });
+    return this.http.get<Cuestionario>(
+      `${this.url}/buscar-cuestionario-codigo/${codigo}`,
+      {
+        headers: this.aggAutorizacionHeader(),
+      }
+    );
   }
 
   create(cuestionario: Cuestionario): Observable<number> {
     return this.http.post<number>(
-      `${this.url}/create/${this.userLogeado}`,
+      `${this.url}/crear/${this.userLogeado}`,
       cuestionario,
       { headers: this.aggAutorizacionHeader() }
     );
@@ -48,7 +58,7 @@ export class CuestionarioService {
 
   update(cuestionario: Cuestionario): Observable<number> {
     return this.http.put<number>(
-      `${this.url}/update/${this.userLogeado}`,
+      `${this.url}/actualizar/${this.userLogeado}`,
       cuestionario,
       { headers: this.aggAutorizacionHeader() }
     );
@@ -56,7 +66,7 @@ export class CuestionarioService {
 
   delete(codigo: number): Observable<number> {
     return this.http.get<number>(
-      `${this.url}/remove/${codigo}/${this.userLogeado}`,
+      `${this.url}/borrar/${codigo}/${this.userLogeado}`,
       { headers: this.aggAutorizacionHeader() }
     );
   }

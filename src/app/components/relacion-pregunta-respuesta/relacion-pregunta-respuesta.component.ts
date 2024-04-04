@@ -92,7 +92,6 @@ export class RelacionPreguntaRespuestaComponent implements OnInit {
   }
 
   up() {
-    console.log('UP');
     window.scroll(0, 0);
   }
 
@@ -170,8 +169,6 @@ export class RelacionPreguntaRespuestaComponent implements OnInit {
   }
 
   ontre() {
-    console.log(this.form.get('pre')!.value);
-
     this.preService.findbyCodigo(this.form.get('pre')!.value).subscribe(
       (data) => {
         this.form.get('tre')!.setValue(data.tipoRespuesta.codigo);
@@ -195,8 +192,6 @@ export class RelacionPreguntaRespuestaComponent implements OnInit {
     prr.depende = this.form.get('depende')!.value;
     prr.descripcionAdicional = this.form.get('descripcion')!.value;
 
-    console.log(':' + this.form.get('tre')!.value + 'Este es');
-
     prr.pregunta = pre;
     prr.respuestaOpciones = rop;
     prr.tipoRespuestas = tre;
@@ -207,8 +202,6 @@ export class RelacionPreguntaRespuestaComponent implements OnInit {
       this.onCancelar();
       this.find();
     } else {
-      console.log('Entro al depende');
-
       this.actualizar(prr);
       this.onCancelar();
       this.find();
