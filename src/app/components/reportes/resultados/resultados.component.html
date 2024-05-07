@@ -1,79 +1,133 @@
 <app-navbar>
-  <div id="content-wrap" class="container mt-3 mb-5 text-center" #target>
-    <div class="card rounded-2 p-0 shadow-sm mt-5">
+  <div class="container mt-3 text-center" #target>
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
       <div
-        class="card-header ml-4 mb-3 mr-4 cursor-select"
+        class="card-header ml-4 mr-4 cursor-select"
         [routerLink]="['/reportes']"
         routerLinkActive="router-link-active"
       >
-        <h4 class="font-usco-default">
-          <strong>Resultados Gráficos Cuestionario</strong>
-        </h4>
+        <h4 class="font-usco-default">Resultados Gráficos Cuestionario</h4>
       </div>
-      <div class="card-body ls">
-        <div class="row">
-          <div class="col">
-            <form [formGroup]="form" class="pl-4 pr-4">
-              <div class="row">
-                <div class="col">
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="outline"
-                  >
-                    <mat-label>Cuestionarios</mat-label>
-                    <mat-select formControlName="codigo">
-                      <mat-option
-                        *ngFor="let cu of lstCuestionarios"
-                        [value]="cu.codigo"
-                        (click)="setTituloResultados(cu.nombre)"
+      <div class="card-body">
+        <div class="container">
+          <fieldset class="scheduler-border shadow-sm">
+            <legend class="scheduler-border font-usco-vt">
+              Seleccione el cuestionario y el tipo de gráfico
+            </legend>
+            <div class="row">
+              <div class="col">
+                <form [formGroup]="form" class="pl-4 pr-4">
+                  <div class="row">
+                    <div class="col">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
                       >
-                        {{ cu.nombre | capitalizeFirstLetter }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                        <mat-label>Cuestionarios</mat-label>
+                        <mat-select formControlName="codigo">
+                          <mat-option
+                            *ngFor="let cu of lstCuestionarios"
+                            [value]="cu.codigo"
+                            (click)="setTituloResultados(cu.nombre)"
+                          >
+                            {{ cu.nombre | capitalizeFirstLetter }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Tipo de gráfico</mat-label>
+                        <mat-select formControlName="grafico">
+                          <mat-option value="column2d">
+                            Gráfico de barras
+                          </mat-option>
+                          <mat-option value="column3d">
+                            Gráfico de barras 3D
+                          </mat-option>
+                          <mat-option value="pie2d">
+                            Gráfico de torta
+                          </mat-option>
+                          <mat-option value="pie3d">
+                            Gráfico de torta 3D
+                          </mat-option>
+                          <mat-option value="doughnut2d">
+                            Gráfico de dona
+                          </mat-option>
+                          <mat-option value="doughnut3d">
+                            Gráfico de dona 3D
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <button
+                        type="button"
+                        class="btn btn-usco-vt"
+                        [disabled]="!form.valid"
+                        (click)="onGenerarDatos()"
+                      >
+                        <i class="fa-solid fa-chart-pie"></i> Mostrar
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset class="scheduler-border shadow-sm" *ngIf="vistaResultados">
+            <legend class="scheduler-border font-usco-vt">
+              Resultados totales
+            </legend>
+            <div class="row mt-4 mb-4">
+              <div class="col">
+                <table class="table table-hover" id="miTabla">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Estamento</th>
+                      <th scope="col">Encuestados</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let res of lstResultados; let i = index">
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td>{{ res.estamentos }}</td>
+                      <td>{{ res.resultados }}</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">-</th>
+                      <td><b>Total</b></td>
+                      <td>
+                        <b>{{ total }}</b>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="row mb-4">
+                  <div class="col text-right">
+                    <button
+                      class="btn btn-usco-vt"
+                      (click)="exportTableToExcel()"
+                    >
+                      <i class="fa-solid fa-file-csv"></i> Exportar Excel
+                    </button>
+                  </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col">
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="outline"
-                  >
-                    <mat-label>Tipo de gráfico</mat-label>
-                    <mat-select formControlName="grafico">
-                      <mat-option value="column2d">
-                        Gráfico de barras
-                      </mat-option>
-                      <mat-option value="column3d">
-                        Gráfico de barras 3D
-                      </mat-option>
-                      <mat-option value="pie2d"> Gráfico de torta </mat-option>
-                      <mat-option value="pie3d">
-                        Gráfico de torta 3D
-                      </mat-option>
-                      <mat-option value="doughnut2d">
-                        Gráfico de dona
-                      </mat-option>
-                      <mat-option value="doughnut3d">
-                        Gráfico de dona 3D
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <button
-                    type="button"
-                    class="btn btn-usco-vt m-4"
-                    [disabled]="!form.valid"
-                    (click)="onGenerarDatos()"
-                  >
-                    <i class="fa-solid fa-chart-pie"></i> Mostrar
-                  </button>
-                </div>
-              </div>
-            </form>
+            </div>
+          </fieldset>
+          <fieldset class="scheduler-border shadow-sm">
+            <legend class="scheduler-border font-usco-vt">
+              Resultados por ítem
+            </legend>
             <div
               *ngIf="vistaPreviaResultados"
               class="row text-center"
@@ -114,88 +168,44 @@
                 </h5>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="vistaResultados">
-        <div class="row pl-5 pr-5 mt-4 mb-4">
-          <div class="col pl-5 pr-5">
-            <table class="table table-hover" id="miTabla">
-              <thead class="thead-dark">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Estamento</th>
-                  <th scope="col">Encuestados</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let res of lstResultados; let i = index">
-                  <th scope="row">{{ i + 1 }}</th>
-                  <td>{{ res.estamentos }}</td>
-                  <td>{{ res.resultados }}</td>
-                </tr>
-                <tr>
-                  <th scope="row">-</th>
-                  <td><b>Total</b></td>
-                  <td>
-                    <b>{{ total }}</b>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <div class="row mb-4">
-              <div class="col text-right">
-                <button class="btn btn-usco-vt" (click)="exportTableToExcel()">
-                  <i class="fa-solid fa-file-csv"></i> Exportar Excel
-                </button>
+            <div *ngIf="vistaResultados">
+              <div class="row text-center" *ngFor="let chart of barChartData">
+                <div class="col mb-4">
+                  <div class="card">
+                    <!--  <fusioncharts
+                      [width]="width"
+                      [height]="height"
+                      [type]="type"
+                      [dataFormat]="dataFormat"
+                      [dataSource]="dataSource"
+                    >
+                    </fusioncharts> -->
+                    <fusioncharts
+                      [width]="width"
+                      [height]="height"
+                      [type]="type"
+                      [dataFormat]="dataFormat"
+                      [dataSource]="chart"
+                    >
+                    </fusioncharts>
+                    <!-- <canvas
+                      baseChart
+                      [datasets]="barChartData[i]"
+                      [labels]="barChartLabels[i]"
+                      [options]="barChartOptions"
+                      [plugins]="barChartPlugins"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType"
+                      [colors]="pieChartColors[i]"
+                    >
+                    </canvas> -->
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="row text-center" *ngFor="let chart of barChartData">
-          <div class="col mb-4">
-            <div class="card">
-              <!--  <fusioncharts
-                [width]="width"
-                [height]="height"
-                [type]="type"
-                [dataFormat]="dataFormat"
-                [dataSource]="dataSource"
-              >
-              </fusioncharts> -->
-              <fusioncharts
-                [width]="width"
-                [height]="height"
-                [type]="type"
-                [dataFormat]="dataFormat"
-                [dataSource]="chart"
-              >
-              </fusioncharts>
-              <!-- <canvas
-                baseChart
-                [datasets]="barChartData[i]"
-                [labels]="barChartLabels[i]"
-                [options]="barChartOptions"
-                [plugins]="barChartPlugins"
-                [legend]="barChartLegend"
-                [chartType]="barChartType"
-                [colors]="pieChartColors[i]"
-              >
-              </canvas> -->
-            </div>
-          </div>
+          </fieldset>
         </div>
       </div>
     </div>
   </div>
 </app-navbar>
-
-<!--  <fusioncharts
-              [width]="width"
-              [height]="height"
-              [type]="type"
-              [dataFormat]="dataFormat"
-              [dataSource]="dataSource"
-            >
-            </fusioncharts> -->

@@ -1,19 +1,22 @@
 <app-navbar>
-  <div id="content-wrap" class="container mt-3 mb-5 text-center" #target>
-    <div class="card rounded-2 p-0 shadow-sm mt-5">
+  <div class="container mt-3 text-center" #target>
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
       <div
-        class="card-header ml-4 mb-3 mr-4 cursor-select"
+        class="card-header ml-4 mr-4 cursor-select"
         [routerLink]="['/inicio']"
         routerLinkActive="router-link-active"
       >
         <h4 class="font-usco-default">
-          <strong>Relación pregunta con opciones de respuesta</strong>
+          Relación pregunta con opciones de respuesta
         </h4>
       </div>
-      <div class="card-body ls">
-        <div class="row">
-          <div class="col">
-            <form [formGroup]="form2" class="pl-4 pr-4">
+      <div class="card-body">
+        <div class="container">
+          <fieldset class="scheduler-border shadow-sm">
+            <legend class="scheduler-border font-usco-vt">
+              Formulario relación pregunta y repsuesta
+            </legend>
+            <form [formGroup]="form2">
               <div class="row">
                 <div class="col">
                   <mat-form-field
@@ -53,215 +56,242 @@
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-        <div *ngIf="flag">
-          <div class="row">
-            <div class="col">
-              <form [formGroup]="form" class="pl-4 pr-4">
-                <div class="row">
-                  <div class="col">
-                    <mat-form-field
-                      class="example-full-width"
-                      appearance="outline"
-                    >
-                      <mat-label>Preguntas</mat-label>
-                      <mat-select name="preguntas" formControlName="pre">
-                        <mat-option
-                          *ngFor="let pre of lstPregunta"
-                          (click)="ontre()"
-                          [value]="pre.codigo"
-                        >
-                          {{ pre.descripcion }}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <mat-form-field
-                      class="example-full-width"
-                      appearance="outline"
-                      *ngIf="editar2"
-                    >
-                      <mat-label>Descripción</mat-label>
-                      <input
-                        matInput
-                        #message
-                        maxlength="256"
-                        formControlName="descripcion"
-                        placeholder="Breve descripción..."
-                        required
-                      />
-                      <mat-hint align="end"
-                        >{{ message.value.length }} / 256</mat-hint
+            <form [formGroup]="form" *ngIf="flag">
+              <div class="row">
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Preguntas</mat-label>
+                    <mat-select name="preguntas" formControlName="pre">
+                      <mat-option
+                        *ngFor="let pre of lstPregunta"
+                        (click)="ontre()"
+                        [value]="pre.codigo"
                       >
-                    </mat-form-field>
-                  </div>
+                        {{ pre.descripcion }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-                <div class="row text-center mt-4">
-                  <div class="col">
-                    <mat-form-field
-                      class="example-full-width"
-                      appearance="outline"
+              </div>
+              <div class="row">
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                    *ngIf="editar2"
+                  >
+                    <mat-label>Descripción</mat-label>
+                    <input
+                      matInput
+                      #message
+                      maxlength="256"
+                      formControlName="descripcion"
+                      placeholder="Breve descripción..."
+                      required
+                    />
+                    <mat-hint align="end"
+                      >{{ message.value.length }} / 256</mat-hint
                     >
-                      <mat-label>Opciones de Respuestas</mat-label>
-                      <mat-select name="re" formControlName="re">
-                        <mat-option
-                          *ngFor="let re of lstRespuesta"
-                          [value]="re.codigo"
-                        >
-                          {{ re.descripcion }}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
+                  </mat-form-field>
                 </div>
-                <div class="row text-center mt-4">
-                  <div class="col">
-                    <mat-form-field
-                      *ngIf="editar2"
-                      class="example-full-width"
-                      appearance="outline"
-                    >
-                      <mat-label>Depende</mat-label>
-                      <mat-select
-                        name="depende"
-                        formControlName="depende"
-                        required
+              </div>
+              <div class="row text-center">
+                <div class="col">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Opciones de Respuestas</mat-label>
+                    <mat-select name="re" formControlName="re">
+                      <mat-option
+                        *ngFor="let re of lstRespuesta"
+                        [value]="re.codigo"
                       >
-                        <mat-option
-                          (click)="mostrar()"
-                          *ngFor="let pre of lstPregunta"
-                          [value]="pre.codigo"
-                        >
-                          {{ pre.descripcion }}
-                        </mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                  </div>
+                        {{ re.descripcion }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
-                <div class="row text-center mt-4 mb-5">
-                  <div class="col">
-                    <button
-                      class="btn btn-success"
-                      [disabled]="!form.valid"
-                      (click)="onCrear()"
+              </div>
+              <div class="row text-center">
+                <div class="col">
+                  <mat-form-field
+                    *ngIf="editar2"
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Depende</mat-label>
+                    <mat-select
+                      name="depende"
+                      formControlName="depende"
+                      required
                     >
-                      <i class="far fa-save"></i> Registrar
-                    </button>
-                    <button
-                      (click)="onCancelar()"
-                      class="btn btn-warning ml-2 mr-2"
-                    >
-                      <i class="far fa-times-circle"></i> Cancelar
-                    </button>
+                      <mat-option
+                        (click)="mostrar()"
+                        *ngFor="let pre of lstPregunta"
+                        [value]="pre.codigo"
+                      >
+                        {{ pre.descripcion }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row text-center">
+                <div class="col">
+                  <button
+                    class="btn btn-success"
+                    [disabled]="!form.valid"
+                    (click)="onCrear()"
+                  >
+                    <i class="far fa-save"></i> Registrar
+                  </button>
+                  <button
+                    (click)="onCancelar()"
+                    class="btn btn-warning ml-2 mr-2"
+                  >
+                    <i class="far fa-times-circle"></i> Cancelar
+                  </button>
 
-                    <button
-                      (click)="onEliminar()"
-                      *ngIf="editar"
-                      class="btn btn-danger"
-                    >
-                      <i class="far fa-trash-alt"></i> Borrar
-                    </button>
-                  </div>
+                  <button
+                    (click)="onEliminar()"
+                    *ngIf="editar"
+                    class="btn btn-danger"
+                  >
+                    <i class="far fa-trash-alt"></i> Borrar
+                  </button>
                 </div>
-              </form>
+              </div>
+            </form>
+          </fieldset>
+          <fieldset class="scheduler-border shadow-sm" *ngIf="flag">
+            <legend class="scheduler-border font-usco-vt">
+              Preguntas y respuestas ralacionadas
+            </legend>
+            <div class="row mt-2 ml-5 mr-5 pl-5 pr-5">
+              <div class="col">
+                <div class="form-group">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Campo de búsqueda</mat-label>
+                    <input
+                      matInput
+                      #input
+                      (keyup)="filtrar($event)"
+                      maxlength="50"
+                      type="text"
+                      required
+                    />
+                    <button matSuffix mat-icon-button>
+                      <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-hint align="end">{{ input.value.length }}/50</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="row mb-5">
-            <div class="col">
-              <table
-                mat-table
-                [dataSource]="dataSource"
-                class="table table-hover shadow"
-              >
-                <ng-container matColumnDef="codigo">
-                  <th mat-header-cell *matHeaderCellDef>No</th>
-                  <td mat-cell *matCellDef="let element; let i = index">
-                    {{ dataSource.filteredData.indexOf(element) + 1 }}
-                  </td>
-                </ng-container>
+            <div class="row">
+              <div class="col">
+                <table
+                  mat-table
+                  [dataSource]="dataSource"
+                  class="table table-hover shadow-sm"
+                >
+                  <ng-container matColumnDef="codigo">
+                    <th mat-header-cell *matHeaderCellDef>No</th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                      {{ dataSource.filteredData.indexOf(element) + 1 }}
+                    </td>
+                  </ng-container>
 
-                <ng-container matColumnDef="descripcion">
-                  <th mat-header-cell *matHeaderCellDef>Descripcion</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.descripcionAdicional }}
-                  </td>
-                </ng-container>
+                  <ng-container matColumnDef="descripcion">
+                    <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.descripcionAdicional }}
+                    </td>
+                  </ng-container>
 
-                <ng-container matColumnDef="rop">
-                  <th mat-header-cell *matHeaderCellDef>Respuesta Opciones</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.respuestaOpciones.descripcion }}
-                  </td>
-                </ng-container>
+                  <ng-container matColumnDef="rop">
+                    <th mat-header-cell *matHeaderCellDef>
+                      Respuesta Opciones
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.respuestaOpciones.descripcion }}
+                    </td>
+                  </ng-container>
 
-                <ng-container matColumnDef="pre">
-                  <th mat-header-cell *matHeaderCellDef>Pregunta</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.pregunta.descripcion }}
-                  </td>
-                </ng-container>
+                  <ng-container matColumnDef="pre">
+                    <th mat-header-cell *matHeaderCellDef>Pregunta</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.pregunta.descripcion }}
+                    </td>
+                  </ng-container>
 
-                <ng-container matColumnDef="depende">
-                  <th mat-header-cell *matHeaderCellDef>Depende</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.depende }}
-                  </td>
-                </ng-container>
+                  <ng-container matColumnDef="depende">
+                    <th mat-header-cell *matHeaderCellDef>Depende</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.depende }}
+                    </td>
+                  </ng-container>
 
-                <ng-container matColumnDef="tre">
-                  <th mat-header-cell *matHeaderCellDef>Tipo Respuesta</th>
-                  <td mat-cell *matCellDef="let element">
-                    {{ element.tipoRespuestas.codigo }}.{{
-                      element.tipoRespuestas.nombre
-                    }}
-                  </td>
-                </ng-container>
-                <!-- editar -->
-                <ng-container matColumnDef="editar">
-                  <th mat-header-cell *matHeaderCellDef>Editar</th>
-                  <td mat-cell *matCellDef="let element">
-                    <div class="example-button-container">
-                      <button
-                        class="btn btn-usco-vt btn-sm"
-                        (click)="onEditarClick(element)"
-                        (click)="scroll(target)"
-                      >
-                        <i class="fas fa-pencil-alt fa-xs"></i>
-                      </button>
-                    </div>
-                  </td>
-                </ng-container>
-                <ng-container matColumnDef="agg">
-                  <th mat-header-cell *matHeaderCellDef>Agregar dependencia</th>
-                  <td mat-cell *matCellDef="let element">
-                    <div class="example-button-container">
-                      <button
-                        class="btn btn-usco-vt btn-sm"
-                        (click)="onEditaragregar(element)"
-                      >
-                        <i class="far fa-plus-square fa-xs"></i>
-                      </button>
-                    </div>
-                  </td>
-                </ng-container>
+                  <ng-container matColumnDef="tre">
+                    <th mat-header-cell *matHeaderCellDef>Tipo Respuesta</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.tipoRespuestas.codigo }}.{{
+                        element.tipoRespuestas.nombre
+                      }}
+                    </td>
+                  </ng-container>
+                  <!-- editar -->
+                  <ng-container matColumnDef="editar">
+                    <th mat-header-cell *matHeaderCellDef>Editar</th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="example-button-container">
+                        <button
+                          class="btn btn-usco-vt btn-sm"
+                          (click)="onEditarClick(element)"
+                          (click)="scroll(target)"
+                        >
+                          <i class="fas fa-pencil-alt fa-xs"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="agg">
+                    <th mat-header-cell *matHeaderCellDef>
+                      Agregar dependencia
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="example-button-container">
+                        <button
+                          class="btn btn-usco-vt btn-sm"
+                          (click)="onEditaragregar(element)"
+                        >
+                          <i class="far fa-plus-square fa-xs"></i>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr
-                  mat-row
-                  *matRowDef="let row; columns: displayedColumns"
-                ></tr>
-              </table>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: displayedColumns"
+                  ></tr>
+                </table>
 
-              <mat-paginator
-                [pageSizeOptions]="[10, 20, 30]"
-                showFirstLastButtons
-              ></mat-paginator>
+                <mat-paginator
+                  [pageSizeOptions]="[10, 20, 30]"
+                  showFirstLastButtons
+                ></mat-paginator>
+              </div>
             </div>
-          </div>
+          </fieldset>
         </div>
       </div>
     </div>

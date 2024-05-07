@@ -46,6 +46,7 @@ import * as Charts from 'fusioncharts/fusioncharts.charts';
 // Load fusion theme
 import * as FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 import { AgrupadoComponent } from './components/reportes/agrupado/agrupado.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 // Add dependencies to FusionChartsModule
 FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
@@ -75,6 +76,7 @@ FusionChartsModule.fcRoot(FusionCharts, Charts, FusionTheme);
     FiltrofacultadPipe,
     FiltronombreprogramaPipe,
     AgrupadoComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,

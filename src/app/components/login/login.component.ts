@@ -8,7 +8,7 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { Usuario } from '../../models/usuario';
-import swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -34,16 +34,19 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.crearFormularioLogin();
     if (this.authService.isAuthenticated()) {
-      if (this.authService.codigoverificacion != null) {
-        const Toast = swal.mixin({
+      if (
+        this.authService.codigoverificacion != null &&
+        this.authService.Codigoverificacion
+      ) {
+        const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
           didOpen: (toast) => {
-            toast.addEventListener('mouseenter', swal.stopTimer);
-            toast.addEventListener('mouseleave', swal.resumeTimer);
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
           },
         });
 
@@ -75,15 +78,15 @@ export class LoginComponent implements OnInit {
       (response) => {
         this.authService.guardarUsuario(response.access_token);
         this.authService.guardarToken(response.access_token);
-        const Toast = swal.mixin({
+        const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
           showConfirmButton: false,
           timer: 3000,
           timerProgressBar: true,
           didOpen: (toast) => {
-            toast.addEventListener('mouseenter', swal.stopTimer);
-            toast.addEventListener('mouseleave', swal.resumeTimer);
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
           },
         });
 

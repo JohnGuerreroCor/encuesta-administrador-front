@@ -56,20 +56,6 @@ export class PreguntaComponent implements OnInit {
     'editar',
   ];
 
-  /* displayedColumns: string[] = [
-    'codigo',
-    'id',
-    'descripcion',
-    'textoAdicional',
-    'tipoRespuesta',
-    'cuestionario',
-    'obligatorio',
-    'tipo',
-    'depende',
-    'gre',
-    'editar',
-  ]; */
-
   //Paginador
 
   @ViewChild(MatPaginator, { static: false })

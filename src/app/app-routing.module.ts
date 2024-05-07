@@ -17,33 +17,83 @@ import { ResultadosComponent } from './components/reportes/resultados/resultados
 import { DescargablesComponent } from './components/reportes/descargables/descargables.component';
 import { RelacionPreguntaRespuestaComponent } from './components/relacion-pregunta-respuesta/relacion-pregunta-respuesta.component';
 import { AgrupadoComponent } from './components/reportes/agrupado/agrupado.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
+
+  { path: 'acceso-denegado', component: NotfoundComponent },
+
   { path: 'login', component: LoginComponent },
   { path: 'token', component: TokenComponent },
-  { path: 'inicio', component: InicioComponent },
 
-  { path: 'cuestionarios', component: CuestionariosComponent },
-  { path: 'cuestionario', component: CuestionarioComponent },
-  { path: 'configuracion', component: ConfiguracionComponent },
-  { path: 'previsualizacion', component: PrevisualizacionComponent },
+  { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] },
 
-  { path: 'preguntas', component: PreguntasComponent },
-  { path: 'pregunta', component: PreguntaComponent },
-  { path: 'escala-likert', component: EscalaLikertComponent },
-  { path: 'grupo-likert', component: GrupoLikertComponent },
+  {
+    path: 'cuestionarios',
+    component: CuestionariosComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'cuestionario',
+    component: CuestionarioComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'configuracion',
+    component: ConfiguracionComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'previsualizacion',
+    component: PrevisualizacionComponent,
+    canActivate: [AuthGuard],
+  },
 
-  { path: 'respuesta', component: RespuestaComponent },
+  {
+    path: 'preguntas',
+    component: PreguntasComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'pregunta', component: PreguntaComponent, canActivate: [AuthGuard] },
+  {
+    path: 'escala-likert',
+    component: EscalaLikertComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'grupo-likert',
+    component: GrupoLikertComponent,
+    canActivate: [AuthGuard],
+  },
 
-  { path: 'relacion-pregunta-respuesta', component: RelacionPreguntaRespuestaComponent },
+  {
+    path: 'respuesta',
+    component: RespuestaComponent,
+    canActivate: [AuthGuard],
+  },
 
-  { path: 'reportes', component: ReportesComponent },
-  { path: 'resultados', component: ResultadosComponent },
-  { path: 'descargables', component: DescargablesComponent },
-  { path: 'agrupados', component: AgrupadoComponent },
+  {
+    path: 'relacion-pregunta-respuesta',
+    component: RelacionPreguntaRespuestaComponent,
+    canActivate: [AuthGuard],
+  },
 
-  { path: '', pathMatch: 'full', redirectTo: '/login' },
-  { path: '**', pathMatch: 'full', redirectTo: '/login' },
+  { path: 'reportes', component: ReportesComponent, canActivate: [AuthGuard] },
+  {
+    path: 'resultados',
+    component: ResultadosComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'descargables',
+    component: DescargablesComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'agrupados', component: AgrupadoComponent, canActivate: [AuthGuard] },
+
+  { path: '**', redirectTo: 'acceso-denegado' },
 ];
 
 @NgModule({

@@ -1,192 +1,218 @@
 <app-navbar>
-  <div id="content-wrap" class="container mt-3 mb-5 text-center" #target>
-    <div class="card rounded-2 p-0 shadow-sm mt-5">
+  <div class="container mt-3 text-center" #target>
+    <div class="card rounded-2 p-0 shadow-sm mt-5 mb-5">
       <div
-        class="card-header ml-4 mb-3 mr-4 cursor-select"
+        class="card-header ml-4 mr-4 cursor-select"
         [routerLink]="['/reportes']"
         routerLinkActive="router-link-active"
       >
-        <h4 class="font-usco-default">
-          <strong>Reporte Excel</strong>
-        </h4>
+        <h4 class="font-usco-default">Reporte Excel</h4>
       </div>
-      <div class="card-body ls">
-        <div class="row pl-4 pr-4">
-          <div class="col">
-            <div class="row mt-3 text-center">
-              <div class="col">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Tipo de Reporte</mat-label>
-                  <mat-select [(ngModel)]="flag">
-                    <mat-option
-                      *ngFor="let s of lstTipos; let i = index"
-                      [value]="i"
-                    >
-                      {{ s }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div>
-            <form [formGroup]="form">
-              <div class="row text-center">
-                <div class="col">
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="outline"
-                  >
-                    <mat-label>Titulo para el Archivo del Reporte</mat-label>
-                    <input
-                      matInput
-                      #message
-                      maxlength="100"
-                      formControlName="titulo"
-                      placeholder="Nombre del reporte"
-                    />
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row text-center" *ngIf="flag == 1">
-                <div class="col">
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="outline"
-                  >
-                    <mat-label>Tipo de Usuario</mat-label>
-                    <mat-select formControlName="tus">
-                      <mat-option
-                        *ngFor="let tus of lstUsuarioTipo"
-                        [value]="tus.codigo"
-                      >
-                        {{ tus.nombre | capitalizeFirstLetter }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row text-center" *ngIf="flag == 2">
-                <div class="col">
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="outline"
-                  >
-                    <mat-label>Cuestionario</mat-label>
-                    <mat-select formControlName="cuestionario">
-                      <mat-option
-                        *ngFor="let cue of lstCuestionarios"
-                        [value]="cue.codigo"
-                      >
-                        {{ cue.nombre | capitalizeFirstLetter }}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row text-center" *ngIf="flag == 3">
-                <div class="col">
-                  <form>
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <fieldset class="scheduler-border shadow-sm">
+                <legend class="scheduler-border font-usco-vt">
+                  Seleccione los parametros para descargar el reporte
+                </legend>
+                <div class="row mt-3 text-center">
+                  <div class="col">
                     <mat-form-field
                       class="example-full-width"
                       appearance="outline"
                     >
-                      <mat-label>UAA</mat-label>
-                      <mat-select name="uaa" [(ngModel)]="ua">
+                      <mat-label>Tipo de Reporte</mat-label>
+                      <mat-select [(ngModel)]="flag">
                         <mat-option
-                          *ngFor="let uaa of lstUaa"
-                          [value]="uaa.codigo"
+                          *ngFor="let s of lstTipos; let i = index"
+                          [value]="i"
                         >
-                          {{ uaa.nombre | uppercase }}
+                          {{ s }}
                         </mat-option>
                       </mat-select>
                     </mat-form-field>
-                  </form>
+                  </div>
                 </div>
-              </div>
-              <!-- <div class="row text-center" *ngIf="flag == 3">
-              <div class="col">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <mat-label>Programa</mat-label>
-                  <mat-select formControlName="programa">
-                    <mat-option
-                      *ngFor="let pro of programas | filtrofacultad: ua"
-                      [value]="pro.codigo"
-                    >
-                      {{ pro.registroSnies }} - {{ pro.uaa.nombreCorto }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-            </div> -->
-              <div class="row text-center" *ngIf="flag == 3">
-                <div class="col">
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="outline"
-                  >
-                    <mat-label>Programa</mat-label>
-                    <form>
-                      <input
-                        type="text"
-                        matInput
-                        [(ngModel)]="nombrePro"
-                        name="nombrePro"
-                        [matAutocomplete]="auto"
-                      />
-                    </form>
-                    <mat-autocomplete #auto="matAutocomplete">
-                      <mat-option
-                        *ngFor="
-                          let pro of programas
-                            | filtrofacultad : ua
-                            | filtronombreprograma : nombrePro
-                        "
-                        (click)="setPrograma(pro.codigo)"
-                        [value]="[pro.uaa.nombreCorto]"
+                <form [formGroup]="form">
+                  <div class="row text-center">
+                    <div class="col">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
                       >
-                        {{ pro.registroSnies }} - {{ pro.uaa.nombreCorto }}
-                      </mat-option>
-                    </mat-autocomplete>
-                  </mat-form-field>
+                        <mat-label
+                          >Titulo para el Archivo del Reporte</mat-label
+                        >
+                        <input
+                          matInput
+                          #message
+                          maxlength="100"
+                          formControlName="titulo"
+                          placeholder="Nombre del reporte"
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row text-center" *ngIf="flag == 1">
+                    <div class="col">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Tipo de Usuario</mat-label>
+                        <mat-select formControlName="tus">
+                          <mat-option
+                            *ngFor="let tus of lstUsuarioTipo"
+                            [value]="tus.codigo"
+                          >
+                            {{ tus.nombre | capitalizeFirstLetter }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row text-center" *ngIf="flag == 2">
+                    <div class="col">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Cuestionario</mat-label>
+                        <mat-select formControlName="cuestionario">
+                          <mat-option
+                            *ngFor="let cue of lstCuestionarios"
+                            [value]="cue.codigo"
+                          >
+                            {{ cue.nombre | capitalizeFirstLetter }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row text-center" *ngIf="flag == 3">
+                    <div class="col">
+                      <form>
+                        <mat-form-field
+                          class="example-full-width"
+                          appearance="outline"
+                        >
+                          <mat-label>UAA</mat-label>
+                          <mat-select name="uaa" [(ngModel)]="ua">
+                            <mat-option
+                              *ngFor="let uaa of lstUaa"
+                              [value]="uaa.codigo"
+                            >
+                              {{ uaa.nombre | uppercase }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- <div class="row text-center" *ngIf="flag == 3">
+                  <div class="col">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Programa</mat-label>
+                      <mat-select formControlName="programa">
+                        <mat-option
+                          *ngFor="let pro of programas | filtrofacultad: ua"
+                          [value]="pro.codigo"
+                        >
+                          {{ pro.registroSnies }} - {{ pro.uaa.nombreCorto }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div> -->
+                  <div class="row text-center" *ngIf="flag == 3">
+                    <div class="col">
+                      <mat-form-field
+                        class="example-full-width"
+                        appearance="outline"
+                      >
+                        <mat-label>Programa</mat-label>
+                        <form>
+                          <input
+                            type="text"
+                            matInput
+                            [(ngModel)]="nombrePro"
+                            name="nombrePro"
+                            [matAutocomplete]="auto"
+                          />
+                        </form>
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option
+                            *ngFor="
+                              let pro of programas
+                                | filtrofacultad : ua
+                                | filtronombreprograma : nombrePro
+                            "
+                            (click)="setPrograma(pro.codigo)"
+                            [value]="[pro.uaa.nombreCorto]"
+                          >
+                            {{ pro.registroSnies }} - {{ pro.uaa.nombreCorto }}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row mt-3 text-center">
+                    <div class="col">
+                      <button
+                        class="btn btn-usco-vt"
+                        (click)="onGenerar()"
+                        [disabled]="!form.valid"
+                      >
+                        <i class="fas fa-download"></i> Descargar
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+              <fieldset class="scheduler-border shadow-sm">
+                <legend class="scheduler-border font-usco-vt">
+                  Resultados obtenidos
+                </legend>
+                <div
+                  *ngIf="vistaPreviaResultados"
+                  class="row text-center"
+                  style="margin-top: 2%; opacity: 0.6"
+                >
+                  <div class="col" *ngIf="!validador">
+                    <img
+                      src="https://www.usco.edu.co/imagen-institucional/logo/universidad-surcolombiana-v.png"
+                      alt="Universidad Surcolombiana"
+                    />
+                  </div>
+                  <div class="col" *ngIf="validador">
+                    <img
+                      *ngIf="gifActivate"
+                      [src]="gifUrlLoad"
+                      alt="Aseguramiento de la calidad"
+                    />
+                  </div>
                 </div>
-              </div>
-              <div class="row mt-3 text-center">
-                <div class="col">
-                  <button
-                    class="btn btn-usco-vt"
-                    (click)="onGenerar()"
-                    [disabled]="!form.valid"
-                  >
-                    <i class="fas fa-download"></i> Descargar
-                  </button>
+                <div class="row" *ngIf="vistaPreviaResultados">
+                  <div class="col mt-2" *ngIf="!validador">
+                    <h5 class="font-usco-default font-usco-gr">
+                      Espacio para la visualización de la información
+                    </h5>
+                  </div>
                 </div>
-              </div>
-            </form>
-            <div
-              *ngIf="vistaPreviaResultados"
-              class="row text-center"
-              style="margin-top: 2%; opacity: 0.6"
-            >
-              <div class="col" *ngIf="!validador">
-                <img
-                  src="https://www.usco.edu.co/imagen-institucional/logo/universidad-surcolombiana-v.png"
-                  alt="Universidad Surcolombiana"
-                />
-              </div>
-              <div class="col" *ngIf="validador">
-                <img
-                  *ngIf="gifActivate"
-                  [src]="gifUrlLoad"
-                  alt="Aseguramiento de la calidad"
-                />
-              </div>
-            </div>
-            <div *ngIf="gifActivate" class="row text-center mt-3">
-              <div class="col" *ngIf="validador">
-                <h5>
-                  Estamos procesando la información
-                  <i class="fas fa-spinner fa-spin"></i>
-                </h5>
-              </div>
+                <div *ngIf="gifActivate" class="row text-center mt-3">
+                  <div class="col" *ngIf="validador">
+                    <h5>
+                      Estamos procesando la información
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                    </h5>
+                  </div>
+                </div>
+              </fieldset>
             </div>
           </div>
         </div>

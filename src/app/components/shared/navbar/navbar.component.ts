@@ -23,9 +23,12 @@ export class NavbarComponent implements OnInit {
   public uaa: any = this.auth.user.uaaNombre;
   public roles: any[] = this.auth.user.roles;
   public rol: any = this.roles.toString();
+  public horaInicioSesion: any = this.auth.user.horaInicioSesion;
+  public horaFinSesion: any = this.auth.user.horaInicioSesion;
   today = new Date();
   url: any = environment.URL_BACKEND;
   panelOpenState = false;
+  panelAbierto: string | null = null;
   foto: FotoAntigua = {
     url: '',
   };
@@ -64,6 +67,14 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  togglePanel(panelId: string): void {
+    if (this.panelAbierto === panelId) {
+      this.panelAbierto = null;
+    } else {
+      this.panelAbierto = panelId;
+    }
+  }
+
   receiveMessage($event: any) {
     this.rol = $event;
   }
@@ -89,7 +100,46 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Convertir la cadena de horaInicioSesion a un objeto de fecha
+    let horaInicioSesionDate = new Date(this.horaInicioSesion + 'Z');
+
+    // Sumar dos horas a la hora de inicio de sesión
+    horaInicioSesionDate.setHours(horaInicioSesionDate.getHours() + 4);
+
+    // Convertir la nueva hora a una cadena en el mismo formato
+    this.horaFinSesion = horaInicioSesionDate
+      .toISOString()
+      .slice(0, 19)
+      .replace('T', ' ');
+
+    let finSesion = new Date(this.horaFinSesion);
+
+    // Calcular la diferencia en milisegundos entre la hora de fin de sesión y la hora actual
+    let diferenciaTiempo = finSesion.getTime() - Date.now();
+
+    // Si faltan 10 minutos o menos para la hora de fin de sesión, mostrar SweetAlert
+    if (diferenciaTiempo <= 10 * 60 * 1000) {
+      // 10 minutos en milisegundos
+      swal
+        .fire({
+          title: '¡Atención!',
+          text: 'Tu sesión está a punto de terminar.',
+          icon: 'warning',
+          confirmButtonText: 'Entendido',
+          confirmButtonColor: '#8f141b',
+          timer: 5000, // Mostrar alerta durante 5 segundos
+          timerProgressBar: true,
+          allowOutsideClick: false,
+        })
+        .then((result) => {
+          if (result.dismiss === swal.DismissReason.timer) {
+            // Cerrar sesión si se confirma o si se agota el tiempo del timer
+            this.logout();
+          }
+        });
+    }
+  }
 
   toggle() {
     this.navbarHiddenService.toggleSideBar();
